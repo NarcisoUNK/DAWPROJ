@@ -12,9 +12,14 @@ class SeatController extends BaseController
         $this->model = Seat::class;
         $this->resource = SeatResource::class;
         $this->validationRules = [
-            #TODO: Add validation rules
+            'id_grandstand' => 'required|integer',
+            'n_seat_grandstand' => 'required|string',
+            'price' => 'required|float',
         ];
     }
 
-    #TODO: set index method
+    public function get_all_by_grandstand(Request $request, $grandstand) {
+        $seats = Seat::where('id_grandstand', $grandstand)->get();
+        return response()->json($seats);
+    }
 }

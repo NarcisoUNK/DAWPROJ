@@ -12,9 +12,13 @@ class GrandstandController extends BaseController
         $this->model = Grandstand::class;
         $this->resource = GrandstandResource::class;
         $this->validationRules = [
-            #TODO: Add validation rules
+            'id_race' => 'required|integer',
+            'name' => 'required|string',
         ];
     }
 
-    #TODO: set index method
+    public function get_all_by_race(Request $request, $race) {
+        $grandstands = Grandstand::where('id_race', $race)->get();
+        return response()->json($grandstands);
+    }
 }

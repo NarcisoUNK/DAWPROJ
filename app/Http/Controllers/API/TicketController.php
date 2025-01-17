@@ -12,9 +12,14 @@ class TicketController extends BaseController
         $this->model = Ticket::class;
         $this->resource = TicketResource::class;
         $this->validationRules = [
-            #TODO: Add validation rules
+            'id_seat' => 'required|integer',
+            'id_user' => 'required|integer',
+            'final_price' => 'required|string',
         ];
     }
 
-    #TODO: set index method
+    public function get_all_by_user(Request $request, $user) {
+        $ticket = Ticket::where('id_user', $user)->get();
+        return response()->json($ticket);
+    }
 }
