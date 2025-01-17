@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2025 at 03:49 PM
+-- Generation Time: Jan 17, 2025 at 04:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -58,6 +58,7 @@ CREATE TABLE `seat` (
   `id_seat` int(11) NOT NULL,
   `id_grandstand` int(11) NOT NULL,
   `n_seat_grandstand` int(11) NOT NULL,
+  `id_ticket` int(11) NOT NULL,
   `price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -112,7 +113,8 @@ ALTER TABLE `race`
 --
 ALTER TABLE `seat`
   ADD PRIMARY KEY (`id_seat`),
-  ADD KEY `seat_id_grandstand` (`id_grandstand`);
+  ADD KEY `seat_id_grandstand` (`id_grandstand`),
+  ADD KEY `seat_id_ticket` (`id_ticket`);
 
 --
 -- Indexes for table `ticket`
@@ -182,7 +184,8 @@ ALTER TABLE `race`
 -- Constraints for table `seat`
 --
 ALTER TABLE `seat`
-  ADD CONSTRAINT `seat_id_grandstand` FOREIGN KEY (`id_grandstand`) REFERENCES `grandstand` (`id_grandstand`);
+  ADD CONSTRAINT `seat_id_grandstand` FOREIGN KEY (`id_grandstand`) REFERENCES `grandstand` (`id_grandstand`),
+  ADD CONSTRAINT `seat_id_ticket` FOREIGN KEY (`id_ticket`) REFERENCES `ticket` (`id_ticket`);
 
 --
 -- Constraints for table `ticket`
