@@ -5,8 +5,8 @@ use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/mainhome', function () {
+    return view('mainhome');
 });
 
 Route::get('/user/{id}', function (string $id) {
