@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('username');
             $table->string('password');
             $table->string('email');
-            $table->binary('permissions',3); # gerir corridas, gerir bancadas, ver analytics
+            $table->char('permissions',3); # gerir corridas, gerir bancadas, ver analytics
             $table->string('name');
         });
     }

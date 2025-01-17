@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 
-class GrandstandController extends Controller
+class GrandstandController extends BaseController
 {
     //
 }
