@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Grandstand extends Model
 {
+
     protected $table = 'grandstand';
     public $timestamps = false;
 

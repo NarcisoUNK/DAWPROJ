@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Race extends Model
 {
+
     protected $table = 'race';
     public $timestamps = false;
 
