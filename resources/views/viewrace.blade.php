@@ -29,7 +29,7 @@
                 <div class="grandstand-card">
                     <p>Main Grandstands</p>
                     <p>From: €799.99</p>
-                    <button class="btn-primary">Buy Tickets</button>
+                    <a href="{{ route('seatselection') }}" class="btn-primary">Buy Tickets</a>
                 </div>
                 <div class="grandstand-card">
                     <p>Turn 1 Grandstands</p>
