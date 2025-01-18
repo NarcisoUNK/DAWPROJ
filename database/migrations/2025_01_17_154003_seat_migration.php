@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id('id_seat');
             $table->bigInteger('id_grandstand')->unsigned();
             $table->foreign('id_grandstand')->references('id_grandstand')->on('grandstand');
-            $table->integer('n_seat_grandstand');
+            $table->string('n_seat_grandstand');
             $table->float('price');
         });
     }

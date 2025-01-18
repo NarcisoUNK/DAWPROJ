@@ -46,6 +46,11 @@ class BaseController extends Controller
   
         return response()->json($response, $code);
     }
+
+    public function error()
+    {
+        return $this->sendError('Method not allowed.', 'Method not allowed.', 405);
+    }
     
     public function index()
     {
@@ -72,13 +77,20 @@ class BaseController extends Controller
         }
    
         $input = $request->all();
-        # TODO: ENCRYPT PASSWORD
-        #$input['password'] = bcrypt($input['password']);
-        $user = $this->model::create($input);
+        $row = $this->model::create($input);
         
-        return $this->sendResponse(new $this->resource($user), 'Created successfully.');
+        return $this->sendResponse(new $this->resource($row), 'Created successfully.');
     }
 
-    #TODO: Implement delete method
+    public function delete($id)
+    {
+        $column = 'id_'.app($this->model)->getTable();
+        $row = $this->model::all()->where($column, $id)->first();
+        if (is_null($row)) {
+            return $this->sendError('Not found.');
+        }
+        $row->delete();
+        return $this->sendResponse(new $this->resource($row), 'Deleted successfully.');
+    }
 
 }

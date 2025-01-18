@@ -12,36 +12,13 @@ class GrandstandController extends BaseController
         $this->model = Grandstand::class;
         $this->resource = GrandstandResource::class;
         $this->validationRules = [
-            'name' => 'required|string|max:255',
-            'id_race' => 'required|exists:races,id_race'
+            'id_race' => 'required|integer',
+            'name' => 'required|string',
         ];
     }
 
-    public function index()
-    {
-        $grandstands = Grandstand::all();
-        return $this->sendResponse(GrandstandResource::collection($grandstands), 'Grandstands retrieved successfully.');
-    }
-
-    public function get($id)
-    {
-        $grandstand = Grandstand::find($id);
-        if (is_null($grandstand)) {
-            return $this->sendError('Grandstand not found.');
-        }
-        return $this->sendResponse(new GrandstandResource($grandstand), 'Grandstand retrieved successfully.');
-    }
-
-    public function add(Request $request)
-    {
-        $validator = Validator::make($request->all(), $this->validationRules);
-
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
-
-        $grandstand = Grandstand::create($request->all());
-
-        return $this->sendResponse(new GrandstandResource($grandstand), 'Grandstand created successfully.');
+    public function get_all_by_race(Request $request, $race) {
+        $grandstands = Grandstand::where('id_race', $race)->get();
+        return response()->json($grandstands);
     }
 }
