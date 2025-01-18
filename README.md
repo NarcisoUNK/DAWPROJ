@@ -94,6 +94,15 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 `POST` /api/race
 
 &emsp; Adiciona uma corrida 
+|Campo|Descrição||
+|:-|:-|-:|
+|id_user    |_id_ do user que está criar            |_required_|
+|race_name  |Nome da corrida                        |_required_|
+|year       |Ano da corrida                         |_required_|
+|country    |País da corrida                        |_required_|
+|city       |Cidade da corrida                      |_required_|
+|image      |Imagem da corrida codificada em base64 |_required_|
+|circuit    |Imagem do circuito codificado em base64|_required_|
 
 `GET` /api/race/delete/{id_race}
 
@@ -156,6 +165,11 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 
 &emsp; Adiciona uma bancada 
 
+|Campo|Descrição||
+|:-|:-|-:|
+|id_race    |_id_ da corrida    |_required_|
+|name       |Nome da bancada    |_required_|
+
 `GET` /api/grandstand/delete/{id_grandstand}
 
 &emsp; Elimina a bancada _id_grandstand_
@@ -216,6 +230,12 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 
 &emsp; Adiciona um lugar 
 
+|Campo|Descrição||
+|:-|:-|-:|
+|id_grandstand      |_id_ da bancada          |_required_|
+|n_seat_grandstand  |Nome do lugar na bancada |_required_|
+|price              |Preço do lugar           |_required_|
+
 `GET` /api/seat/delete/{id_seat}
 
 &emsp; Elimina o lugar _id_seat_
@@ -274,6 +294,12 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 `POST` /api/ticket
 
 &emsp; Adiciona um bilhete 
+
+|Campo|Descrição||
+|:-|:-|-:|
+|id_seat        |_id_ do lugar  |_required_|
+|id_user        |_id_ do user   |_required_|
+|final_price    |Preço final    |_required_|
 
 `GET` /api/ticket/delete/{id_ticket}
 
