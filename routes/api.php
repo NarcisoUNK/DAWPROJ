@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 # USER ROUTES
 Route::get('/users', [UserController::class, 'index']);
-Route::get('/user/get/{id}', [UserController::class, 'get']);
+Route::get('/user/{id}', [UserController::class, 'get']);
 Route::post('/user/add', [UserController::class, 'add']);
 
 # RACE ROUTES
