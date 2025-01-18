@@ -27,9 +27,9 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 ```
 
 `POST` /api/user
+> Requer autenticação
 
 &emsp; Adiciona um user 
-> Requer autenticação
 
 |Campo|Descrição||
 |:-|:-|-:|
