@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\Route;
 # USER ROUTES
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/user/{id}', [UserController::class, 'get']);
-Route::post('/user/add', [UserController::class, 'add']);
+Route::post('/user', [UserController::class, 'add'])->middleware(['auth:sanctum']);
 
 # RACE ROUTES
 Route::get('/races', [RaceController::class, 'index']);
 Route::get('/race/{id}', [RaceController::class, 'get']);
 Route::get('/race', [RaceController::class, 'error'])->middleware(['auth:sanctum']);
-Route::post('/race', [RaceController::class, 'add']);
+Route::post('/race', [RaceController::class, 'add'])->middleware(['auth:sanctum']);
 Route::get('/race/delete/{id}', [RaceController::class, 'delete'])->middleware(['auth:sanctum']);
 
 # GRANDSTAND ROUTES

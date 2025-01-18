@@ -26,6 +26,17 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 }
 ```
 
+`POST` /api/user
+
+&emsp; Adiciona um user 
+|Campo|Descrição||
+|:-|:-|-:|
+|username       |username do user       |_required_|
+|email          |email do user          |_required_|
+|password       |password do user       |_required_|
+|permissions    |permissões da conta    |_required_|
+|name           |Nome a apresentar      |_required_|
+
 ### Races
 
 `GET` /api/races
