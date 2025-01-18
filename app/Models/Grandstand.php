@@ -12,6 +12,11 @@ class Grandstand extends Model
     protected $table = 'grandstand';
     public $timestamps = false;
 
+    protected $fillable = [
+        'id_race',
+        'name',
+    ];
+
     public function race(): BelongsTo
     {
         return $this->belongsTo(Race::class, 'race_id','race_id');

@@ -16,7 +16,7 @@ Route::post('/user/add', [UserController::class, 'add']);
 Route::get('/races', [RaceController::class, 'index']);
 Route::get('/race/{id}', [RaceController::class, 'get']);
 Route::get('/race', [RaceController::class, 'error'])->middleware(['auth:sanctum']);
-Route::post('/race', [RaceController::class, 'add'])->middleware(['auth:sanctum']);
+Route::post('/race', [RaceController::class, 'add']);
 Route::get('/race/delete/{id}', [RaceController::class, 'delete'])->middleware(['auth:sanctum']);
 
 # GRANDSTAND ROUTES

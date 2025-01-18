@@ -42,7 +42,9 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
       "race_name": "FORMULA 1 AUSTRALIAN GRAND PRIX 2025",
       "year": 2025,
       "country": "Australia",
-      "city": "Melbourne"
+      "city": "Melbourne",
+      "image": "[...]",
+      "circuit": "[...]",
     },
     {
       "id_race": 2,
@@ -51,6 +53,8 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
       "year": 2025,
       "country": "China",
       "city": "Shanghai"
+      "image": "[...]",
+      "circuit": "[...]",
     },
     {
       "id_race": 3,
@@ -59,6 +63,8 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
       "year": 2025,
       "country": "Japan",
       "city": "Suzuka"
+      "image": "[...]",
+      "circuit": "[...]",
     }
   ],
   "message": "Retrieved successfully."
@@ -77,7 +83,9 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
     "race_name": "FORMULA 1 HEINEKEN CHINESE GRAND PRIX 2025",
     "year": 2025,
     "country": "China",
-    "city": "Shanghai"
+    "city": "Shanghai",
+    "image": "[...]",
+    "circuit": "[...]",
   },
   "message": "Retrieved successfully."
 }

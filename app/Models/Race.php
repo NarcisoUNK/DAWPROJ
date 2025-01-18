@@ -12,6 +12,16 @@ class Race extends Model
     protected $table = 'race';
     public $timestamps = false;
 
+    protected $fillable = [
+        'id_user',
+        'race_name',
+        'year',
+        'country',
+        'city',
+        'image',
+        'circuit'
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id','user_id');

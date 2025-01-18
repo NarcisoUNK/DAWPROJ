@@ -17,6 +17,8 @@ class RaceController extends BaseController
             'year' => 'required|integer',
             'country' => 'required|string',
             'city' => 'required|string',
+            'image' => 'required|string',
+            'circuit' => 'required|string',
         ];
     }
 }

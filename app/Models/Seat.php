@@ -11,6 +11,12 @@ class Seat extends Model
     protected $table = 'seat';
     public $timestamps = false;
 
+    protected $fillable = [
+        'id_grandstand',
+        'n_seat_grandstand',
+        'price'
+    ];
+
     public function grandstand(): BelongsTo
     {
         return $this->belongsTo(Grandstand::class, 'grandstand_id','grandstand_id');
