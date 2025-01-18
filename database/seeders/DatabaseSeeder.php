@@ -18,13 +18,19 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        DB::table('user')->insert([
-            'username' => 'teste',
-            'password' => 'teste',
-            'email' => 'teste@teste.teste',
+        DB::table('user')->insert([[
+            'username' => 'prom',
+            'password' => 'prom',
+            'email' => 'prom@prom.prom',
             'permissions' => 111,
-            'name' => 'teste',
-        ]);
+            'name' => 'prom',
+        ],[
+            'username' => 'client',
+            'password' => 'client',
+            'email' => 'client@client.client',
+            'permissions' => 000,
+            'name' => 'client',
+        ]]);
 
         DB::table('race')->insert([[
             'id_user' => 1,
