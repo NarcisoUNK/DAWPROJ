@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'client',
             'password' => 'client',
             'email' => 'client@client.client',
-            'permissions' => 000,
+            'permissions' => 111,
             'name' => 'client',
         ]]);
 
@@ -95,7 +95,7 @@ class DatabaseSeeder extends Seeder
             $seat = Seat::all()->random();
             DB::table('ticket')->insert([
                 'id_seat' => $seat->id_seat,
-                'id_user' => 1,
+                'id_user' => rand(1,2),
                 'final_price' => $seat->price,
             ]);
         }

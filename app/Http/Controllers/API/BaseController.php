@@ -89,8 +89,12 @@ class BaseController extends Controller
         if (is_null($row)) {
             return $this->sendError('Not found.');
         }
-        $row->delete();
-        return $this->sendResponse(new $this->resource($row), 'Deleted successfully.');
+        try {
+            $row->where($column, $id)->delete();
+        } catch (\Exception $e) {
+            return $this->sendError('Error.', $e->getMessage());
+        }
+        return $this->sendResponse('','Deleted successfully.');
     }
 
 }
