@@ -12,7 +12,7 @@ class RaceController extends BaseController
         $this->model = Race::class;
         $this->resource = RaceResource::class;
         $this->validationRules = [
-            'id_user' => 'required|integer',
+            'id_user' => 'required|exists:user,id_user',
             'race_name' => 'required|string',
             'year' => 'required|integer',
             'country' => 'required|string',

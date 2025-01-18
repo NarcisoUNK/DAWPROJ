@@ -27,14 +27,14 @@ Route::post('/grandstand', [GrandstandController::class, 'add'])->middleware(['a
 Route::get('/grandstand/delete/{id}', [GrandstandController::class, 'delete'])->middleware(['auth:sanctum']);
 
 # SEAT ROUTES
-Route::get('/grandstand/{grandstand}/seats', [SeatController::class, 'index']);
+Route::get('/grandstand/{grandstand}/seats', [SeatController::class, 'get_all_by_grandstand']);
 Route::get('/seat/{id}', [SeatController::class, 'get']);
 Route::get('/seat', [SeatController::class, 'error'])->middleware(['auth:sanctum']);
 Route::post('/seat', [SeatController::class, 'add'])->middleware(['auth:sanctum']);
 Route::get('/seat/delete/{id}', [SeatController::class, 'delete'])->middleware(['auth:sanctum']);
 
 # TICKET ROUTES
-Route::get('/user/{id}/tickets', [TicketController::class, 'get_all_by_grandstand']);
+Route::get('/user/{id}/tickets', [TicketController::class, 'get_all_by_user']);
 Route::get('/ticket/{id}', [TicketController::class, 'get']);
 Route::get('/ticket', [TicketController::class, 'error'])->middleware(['auth:sanctum']);
 Route::post('/ticket', [TicketController::class, 'add'])->middleware(['auth:sanctum']);
