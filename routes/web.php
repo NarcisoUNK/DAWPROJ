@@ -18,7 +18,11 @@ Route::get('/loginhome', function () {
 
 Route::get('/viewrace', function () {
     return view('viewrace');
-})->name('viewrace'); // Named route: 'loginhome'
+})->name('viewrace'); // Named route: 'viewrace'
+
+Route::get('seatselection', function () {
+    return view('seatselection');
+})->name('seatselection');
 
 // Seller page route
 Route::get('/sellerpage', function () {
