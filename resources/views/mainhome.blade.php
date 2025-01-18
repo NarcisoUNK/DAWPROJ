@@ -29,7 +29,7 @@
         <section class="hero-section">
             <div class="hero-text">
                 <h2>FORMULA 1 PIRELLI UNITED STATES GRAND PRIX 2024</h2>
-                <button class="btn-primary">Buy Tickets</button>
+                <a href="{{ route('viewrace') }}" class="btn-primary">Buy Tickets</a>
             </div>
             <div class="hero-image">
                 <img src="path/to/your/image.jpg" alt="Race Image">

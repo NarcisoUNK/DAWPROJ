@@ -1,0 +1,96 @@
+/* Geral */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e;
+    color: #fff;
+}
+
+/* Header */
+.header {
+    background-color: #ff0000;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+/* Main Content */
+.main-content {
+    padding: 20px;
+}
+
+/* Hero Section */
+.hero-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.hero-image img {
+    width: 400px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.race-info {
+    max-width: 50%;
+}
+
+.race-info h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.race-info p {
+    margin: 10px 0;
+}
+
+/* Grandstands Section */
+.grandstands-section {
+    background-color: #2c2c2c;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.grandstands-section h2 {
+    margin-bottom: 20px;
+}
+
+.grandstands-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.grandstand-card {
+    background-color: #3a3a3a;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.grandstand-card p {
+    margin: 10px 0;
+}
+
+.btn-primary {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #cc0000;
+}

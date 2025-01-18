@@ -22,7 +22,7 @@
                 </div>
                 <button type="submit" class="btn-primary">Login</button>
                 <p class="forgot-password">
-                    <a href="#">Forgot Password?</a>
+                    <a href="{{ route('sellerpage') }}">Forgot Password?</a>
                 </p>
             </form>
         </div>
