@@ -29,6 +29,8 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 `POST` /api/user
 
 &emsp; Adiciona um user 
+> Requer autenticação
+
 |Campo|Descrição||
 |:-|:-|-:|
 |username       |username do user       |_required_|
@@ -103,6 +105,7 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 ```
 
 `POST` /api/race
+> Requer autenticação
 
 &emsp; Adiciona uma corrida 
 |Campo|Descrição||
@@ -116,6 +119,7 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 |circuit    |Imagem do circuito codificado em base64|_required_|
 
 `GET` /api/race/delete/{id_race}
+> Requer autenticação
 
 &emsp; Elimina a corrida _id_race_
 ``` JSON
@@ -173,6 +177,7 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 ```
 
 `POST` /api/grandstand
+> Requer autenticação
 
 &emsp; Adiciona uma bancada 
 
@@ -182,6 +187,7 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 |name       |Nome da bancada    |_required_|
 
 `GET` /api/grandstand/delete/{id_grandstand}
+> Requer autenticação
 
 &emsp; Elimina a bancada _id_grandstand_
 ``` JSON
@@ -238,6 +244,7 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 ```
 
 `POST` /api/seat
+> Requer autenticação
 
 &emsp; Adiciona um lugar 
 
@@ -250,6 +257,7 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 `GET` /api/seat/delete/{id_seat}
 
 &emsp; Elimina o lugar _id_seat_
+> Requer autenticação
 ``` JSON
 {
   "success": true,
@@ -303,6 +311,7 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 ```
 
 `POST` /api/ticket
+> Requer autenticação
 
 &emsp; Adiciona um bilhete 
 
@@ -313,6 +322,7 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 |final_price    |Preço final    |_required_|
 
 `GET` /api/ticket/delete/{id_ticket}
+> Requer autenticação
 
 &emsp; Elimina o bilhete _id_ticket_
 ``` JSON
