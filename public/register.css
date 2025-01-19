@@ -70,36 +70,3 @@ body {
 .btn-primary:hover {
     background-color: #cc0000;
 }
-
-/* Forgot Password */
-.forgot-password {
-    margin-top: 15px;
-    text-align: center;
-}
-
-.forgot-password a {
-    color: #007bff;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.forgot-password a:hover {
-    text-decoration: underline;
-}
-
-/* Register Link */
-.register-link {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.register-link a {
-    color: #007bff;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.register-link a:hover {
-    text-decoration: underline;
-}

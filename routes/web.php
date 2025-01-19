@@ -1,10 +1,7 @@
 <?php
-
-use App\Http\Resources\UserCollection;
-use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
-
+use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\Auth\LoginController;
 
 // Main home route
 Route::get('/mainhome', function () {
@@ -16,29 +13,38 @@ Route::get('/loginhome', function () {
     return view('loginhome');
 })->name('loginhome'); // Named route: 'loginhome'
 
-Route::get('/viewrace', function () {
-    return view('viewrace');
-})->name('viewrace'); // Named route: 'viewrace'
+// Register route
+Route::get('/register', function () {
+    return view('register');
+})->name('register');
 
-Route::get('seatselection', function () {
-    return view('seatselection');
-})->name('seatselection');
+// Register user route
+Route::post('/register', [UserController::class, 'register'])->name('user.register');
+
+// Login user route
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+
+// Route for viewing a specific race
+Route::get('/viewrace/{id}', function ($id) {
+    return view('viewrace', ['id' => $id]);
+})->name('viewrace');
+
+// Route for viewing seats of a specific grandstand
+Route::get('/grandstand/{id}/seats', function ($id) {
+    return view('seatselection', ['id' => $id]);
+})->name('grandstand.seats');
 
 // Seller page route
 Route::get('/sellerpage', function () {
     return view('sellerpage');
 })->name('sellerpage'); // Named route: 'sellerpage'
 
+// Create Race route
 Route::get('/createrace', function () {
     return view('createrace');
 })->name('createrace');
 
-Route::post('/store-race', [RaceController::class, 'store'])->name('store.race');
-
-// Create Grandstand
+// Create Grandstand route
 Route::get('/creategrandstand', function () {
     return view('creategrandstand');
 })->name('creategrandstand');
-
-Route::post('/store-grandstand', [GrandstandController::class, 'store'])->name('store.grandstand');
-

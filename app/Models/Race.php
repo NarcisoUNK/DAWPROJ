@@ -8,17 +8,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Race extends Model
 {
-
     protected $table = 'race';
+    protected $primaryKey = 'id_race'; // Set the primary key
     public $timestamps = false;
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id','user_id');
+        return $this->belongsTo(User::class, 'id_user', 'id_user');
     }
 
     public function grandstands(): HasMany
     {
-        return $this->hasMany(Grandstand::class, 'grandstand_id','grandstand_id');
+        return $this->hasMany(Grandstand::class, 'id_race', 'id_race');
     }
 }
