@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 # USER ROUTES
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/user/{id}', [UserController::class, 'get']);
-Route::post('/user/add', [UserController::class, 'add']);
+Route::post('/user', [UserController::class, 'add'])->middleware(['auth:sanctum']);
 
 # RACE ROUTES
 Route::get('/races', [RaceController::class, 'index']);

@@ -11,6 +11,12 @@ class Ticket extends Model
     protected $table = 'ticket';
     public $timestamps = false;
 
+    protected $fillable = [
+        'id_seat',
+        'id_user',
+        'final_price'
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id','user_id');

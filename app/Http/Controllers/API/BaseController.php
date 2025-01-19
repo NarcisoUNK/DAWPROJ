@@ -77,6 +77,16 @@ class BaseController extends Controller
         }
    
         $input = $request->all();
+
+        if(app($this->model)->getTable() == 'user'){
+            if($this->model::where('email', $input['email'])->first()){
+                return $this->sendError('Validation Error.', ['email' => 'Email already exists.']);       
+            }
+            if($this->model::where('username', $input['username'])->first()){
+                return $this->sendError('Validation Error.', ['username' => 'Username already exists.']);       
+            }
+            $input['password'] = bcrypt($input['password']);
+        }
         $row = $this->model::create($input);
         
         return $this->sendResponse(new $this->resource($row), 'Created successfully.');

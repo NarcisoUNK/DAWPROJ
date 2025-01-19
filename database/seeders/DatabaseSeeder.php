@@ -38,18 +38,24 @@ class DatabaseSeeder extends Seeder
             'year' => '2025',
             'country' => 'Australia',
             'city' => 'Melbourne',
+            'image' => base64_encode(file_get_contents('https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/Australia')),
+            'circuit' => base64_encode(file_get_contents('https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Australia%20carbon')),
         ],[
             'id_user' => 1,
             'race_name' => 'FORMULA 1 HEINEKEN CHINESE GRAND PRIX 2025',
             'year' => '2025',
             'country' => 'China',
             'city' => 'Shanghai',
+            'image' => base64_encode(file_get_contents('https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/China')),
+            'circuit' => base64_encode(file_get_contents('https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/China%20carbon')),
         ],[
             'id_user' => 1,
             'race_name' => 'FORMULA 1 LENOVO JAPANESE GRAND PRIX 2025',
             'year' => '2025',
             'country' => 'Japan',
             'city' => 'Suzuka',
+            'image' => base64_encode(file_get_contents('https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/Japan')),
+            'circuit' => base64_encode(file_get_contents('https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Japan%20carbon')),
         ]]);
 
         DB::table('grandstand')->insert([[

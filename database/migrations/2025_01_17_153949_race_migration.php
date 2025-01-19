@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('year');
             $table->string('country');
             $table->string('city');
+            $table->longText('image');
+            $table->longText('circuit');
         });
     }
 

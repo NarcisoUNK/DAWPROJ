@@ -26,6 +26,19 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 }
 ```
 
+`POST` /api/user
+> Requer autenticação
+
+&emsp; Adiciona um user 
+
+|Campo|Descrição||
+|:-|:-|-:|
+|username       |username do user       |_required_|
+|email          |email do user          |_required_|
+|password       |password do user       |_required_|
+|permissions    |permissões da conta    |_required_|
+|name           |Nome a apresentar      |_required_|
+
 ### Races
 
 `GET` /api/races
@@ -42,7 +55,9 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
       "race_name": "FORMULA 1 AUSTRALIAN GRAND PRIX 2025",
       "year": 2025,
       "country": "Australia",
-      "city": "Melbourne"
+      "city": "Melbourne",
+      "image": "[...]",
+      "circuit": "[...]",
     },
     {
       "id_race": 2,
@@ -51,6 +66,8 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
       "year": 2025,
       "country": "China",
       "city": "Shanghai"
+      "image": "[...]",
+      "circuit": "[...]",
     },
     {
       "id_race": 3,
@@ -59,6 +76,8 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
       "year": 2025,
       "country": "Japan",
       "city": "Suzuka"
+      "image": "[...]",
+      "circuit": "[...]",
     }
   ],
   "message": "Retrieved successfully."
@@ -77,17 +96,30 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
     "race_name": "FORMULA 1 HEINEKEN CHINESE GRAND PRIX 2025",
     "year": 2025,
     "country": "China",
-    "city": "Shanghai"
+    "city": "Shanghai",
+    "image": "[...]",
+    "circuit": "[...]",
   },
   "message": "Retrieved successfully."
 }
 ```
 
 `POST` /api/race
+> Requer autenticação
 
 &emsp; Adiciona uma corrida 
+|Campo|Descrição||
+|:-|:-|-:|
+|id_user    |_id_ do user que está criar            |_required_|
+|race_name  |Nome da corrida                        |_required_|
+|year       |Ano da corrida                         |_required_|
+|country    |País da corrida                        |_required_|
+|city       |Cidade da corrida                      |_required_|
+|image      |Imagem da corrida codificada em base64 |_required_|
+|circuit    |Imagem do circuito codificado em base64|_required_|
 
 `GET` /api/race/delete/{id_race}
+> Requer autenticação
 
 &emsp; Elimina a corrida _id_race_
 ``` JSON
@@ -145,10 +177,17 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 ```
 
 `POST` /api/grandstand
+> Requer autenticação
 
 &emsp; Adiciona uma bancada 
 
+|Campo|Descrição||
+|:-|:-|-:|
+|id_race    |_id_ da corrida    |_required_|
+|name       |Nome da bancada    |_required_|
+
 `GET` /api/grandstand/delete/{id_grandstand}
+> Requer autenticação
 
 &emsp; Elimina a bancada _id_grandstand_
 ``` JSON
@@ -205,12 +244,20 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 ```
 
 `POST` /api/seat
+> Requer autenticação
 
 &emsp; Adiciona um lugar 
+
+|Campo|Descrição||
+|:-|:-|-:|
+|id_grandstand      |_id_ da bancada          |_required_|
+|n_seat_grandstand  |Nome do lugar na bancada |_required_|
+|price              |Preço do lugar           |_required_|
 
 `GET` /api/seat/delete/{id_seat}
 
 &emsp; Elimina o lugar _id_seat_
+> Requer autenticação
 ``` JSON
 {
   "success": true,
@@ -264,10 +311,18 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 ```
 
 `POST` /api/ticket
+> Requer autenticação
 
 &emsp; Adiciona um bilhete 
 
+|Campo|Descrição||
+|:-|:-|-:|
+|id_seat        |_id_ do lugar  |_required_|
+|id_user        |_id_ do user   |_required_|
+|final_price    |Preço final    |_required_|
+
 `GET` /api/ticket/delete/{id_ticket}
+> Requer autenticação
 
 &emsp; Elimina o bilhete _id_ticket_
 ``` JSON

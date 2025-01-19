@@ -12,11 +12,9 @@ class TicketController extends BaseController
         $this->model = Ticket::class;
         $this->resource = TicketResource::class;
         $this->validationRules = [
-            [
-                'id_seat' => 'required|exists:seat,id_seat',
-                'id_user' => 'required|exists:user,id_user',
-                'final_price' => 'required|numeric'
-            ]
+            'id_seat' => 'required|exists:seat,id_seat',
+            'id_user' => 'required|exists:user,id_user',
+            'final_price' => 'required|numeric'
         ];
     }
 
