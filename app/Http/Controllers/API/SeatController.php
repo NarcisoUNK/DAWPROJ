@@ -18,8 +18,8 @@ class SeatController extends BaseController
         ];
     }
 
-    public function get_all_by_grandstand(Request $request, $grandstand) {
+    public function get_all_by_grandstand($grandstand) {
         $seats = Seat::where('id_grandstand', $grandstand)->get();
-        return $this->sendResponse($seats, 'Retrieved successfully.');
+        return $this->sendResponse(SeatResource::collection($seats), 'Seats retrieved successfully.');
     }
 }

@@ -12,7 +12,7 @@ class RaceController extends BaseController
         $this->model = Race::class;
         $this->resource = RaceResource::class;
         $this->validationRules = [
-            'id_user' => 'required|exists:user,id_user',
+            'id_user' => 'required|exists:users,id_user',
             'race_name' => 'required|string',
             'year' => 'required|integer',
             'country' => 'required|string',
@@ -20,5 +20,29 @@ class RaceController extends BaseController
             'image' => 'required|string',
             'circuit' => 'required|string',
         ];
+    }
+
+    public function index()
+    {
+        $races = Race::all();
+        $upcomingRace = Race::where('year', '>=', date('Y'))->orderBy('year')->first();
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'races' => RaceResource::collection($races),
+                'upcomingRace' => new RaceResource($upcomingRace)
+            ],
+            'message' => 'Races retrieved successfully.'
+        ]);
+    }
+
+    public function show($id)
+    {
+        $race = Race::findOrFail($id);
+        return response()->json([
+            'success' => true,
+            'data' => new RaceResource($race),
+            'message' => 'Race retrieved successfully.'
+        ]);
     }
 }

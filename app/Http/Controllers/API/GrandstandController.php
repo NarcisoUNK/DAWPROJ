@@ -17,8 +17,8 @@ class GrandstandController extends BaseController
         ];
     }
 
-    public function get_all_by_race(Request $request, $race) {
+    public function get_all_by_race($race) {
         $grandstands = Grandstand::where('id_race', $race)->get();
-        return $this->sendResponse($grandstands, 'Retrieved successfully.');
+        return $this->sendResponse(GrandstandResource::collection($grandstands), 'Grandstands retrieved successfully.');
     }
 }

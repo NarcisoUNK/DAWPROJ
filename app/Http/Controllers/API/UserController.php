@@ -4,11 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator as FacadesValidator;
-use Illuminate\Validation\Validator as ValidationValidator;
-use Validator;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends BaseController
 {
@@ -16,16 +14,28 @@ class UserController extends BaseController
         $this->model = User::class;
         $this->resource = UserResource::class;
         $this->validationRules = [
-            'username' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'permissions' => 'required',
-            'name' => 'required'
+            'username' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'name' => 'required|string|max:255',
         ];
     }
-    
-    public function index()
-    { 
-        return $this->sendError("Can't retrieve all users.");
+
+    public function register(Request $request)
+    {
+        $validator = Validator::make($request->all(), $this->validationRules);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $user = User::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'name' => $request->name,
+        ]);
+
+        return $this->sendResponse(new UserResource($user), 'User registered successfully.');
     }
 }

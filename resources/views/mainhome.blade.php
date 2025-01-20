@@ -6,6 +6,7 @@
     <title>Home</title>
     <link rel="stylesheet" href="{{ asset('app.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <header class="header">
@@ -23,65 +24,73 @@
             <li><a href="#about">About</a></li>
             <li><<a href="{{ route('login') }}">Login</a></li>
             </ul>
+            <li><a href="{{ route('loginhome') }}">Login</a></li>
+        </ul>
     </nav>
 
     <main class="main-content">
-        <section class="hero-section">
+        <section class="hero-section" id="hero-section">
             <div class="hero-text">
                 <h2>FORMULA 1 PIRELLI UNITED STATES GRAND PRIX 2024</h2>
                 <a href="{{ route('race') }}" class="btn-primary">Buy Tickets</a> <!-- TODO:send race id -->
             </div>
             <div class="hero-image">
-                <img src="path/to/your/image.jpg" alt="Race Image">
+                <img src="path/to/your/image.jpg" alt="Race Image" id="main-race-image">
             </div>
         </section>
 
         <section class="events-section">
             <h2>Top Events</h2>
-            <div class="events-container">
-                <div class="event-card">
-                    <img src="path/to/your/event1.jpg" alt="Event 1">
-                    <p>Mexico Grand Prix</p>
-                </div>
-                <div class="event-card">
-                    <img src="path/to/your/event2.jpg" alt="Event 2">
-                    <p>Brazil Grand Prix</p>
-                </div>
-                <div class="event-card">
-                    <img src="path/to/your/event3.jpg" alt="Event 3">
-                    <p>Abu Dhabi Grand Prix</p>
-                </div>
+            <div class="events-container" id="events-container">
+                <!-- Corridas serão carregadas aqui -->
             </div>
         </section>
     </main>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fetch races and upcoming race
+            axios.get('/api/races')
+                .then(function(response) {
+                    const { races, upcomingRace } = response.data.data;
+
+                    // Update the main race section
+                    if (upcomingRace) {
+                        document.getElementById('main-race-name').innerText = upcomingRace.race_name;
+                        document.getElementById('main-race-link').href = `/viewrace/${upcomingRace.id_race}`;
+                        // Update the image source if you have a specific image for each race
+                        // document.getElementById('main-race-image').src = `path/to/your/image/${upcomingRace.image}`;
+                    } else {
+                        document.getElementById('main-race-name').innerText = 'No upcoming races';
+                    }
+
+                    // Update the events section
+                    const eventsContainer = document.getElementById('events-container');
+                    races.forEach(function(race) {
+                        const eventCard = document.createElement('div');
+                        eventCard.classList.add('event-card');
+                        eventCard.innerHTML = `
+                            <img src="path/to/your/event.jpg" alt="${race.race_name}">
+                            <p>${race.race_name}</p>
+                            <a href="/viewrace/${race.id_race}" class="btn-primary">Buy Tickets</a>
+                        `;
+                        eventsContainer.appendChild(eventCard);
+                    });
+                })
+                .catch(function(error) {
+                    console.error('Error fetching races:', error);
+                });
+        });
+
         // JavaScript for menu pop-up animation
         const menuIcon = document.getElementById('menu-icon');
         const menu = document.getElementById('menu');
 
         menuIcon.addEventListener('click', () => {
-            const isHidden = menu.classList.contains('hidden');
-
-            if (isHidden) {
-                menu.classList.remove('hidden');
-                anime({
-                    targets: '.menu',
-                    opacity: [0, 1],
-                    scale: [0.5, 1],
-                    duration: 400,
-                    easing: 'easeOutQuad'
-                });
-            } else {
-                anime({
-                    targets: '.menu',
-                    opacity: [1, 0],
-                    scale: [1, 0.5],
-                    duration: 400,
-                    easing: 'easeInQuad',
-                    complete: () => menu.classList.add('hidden') // Add hidden class after animation ends
-                });
-            }
+            console.log('Menu icon clicked'); // Debugging statement
+            console.log('Menu class before toggle:', menu.classList);
+            menu.classList.toggle('hidden');
+            console.log('Menu class after toggle:', menu.classList);
         });
     </script>
 </body>

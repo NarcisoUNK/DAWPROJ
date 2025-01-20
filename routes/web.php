@@ -1,6 +1,7 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
+
 
 // Main home route
 Route::get('/', function () {
@@ -12,29 +13,29 @@ Route::get('/login', function () {
     return view('loginhome');
 });
 
-Route::get('/race', function () {
+Route::get('/viewrace', function () {
     return view('viewrace');
-});
+})->name('viewrace'); // Named route: 'viewrace'
 
-Route::get('/race/seats', function () {
+Route::get('seatselection', function () {
     return view('seatselection');
-});
+})->name('seatselection');
 
 // Seller page route
 Route::get('/sellerpage', function () {
     return view('sellerpage');
 })->name('sellerpage'); // Named route: 'sellerpage'
 
-Route::get('/race/new', function () {
+Route::get('/createrace', function () {
     return view('createrace');
 });
 
-Route::post('/race/new', [RaceController::class, 'store']);
+Route::post('/store-race', [RaceController::class, 'store'])->name('store.race');
 
 // Create Grandstand
-Route::get('/grandstand/new', function () {
+Route::get('/creategrandstand', function () {
     return view('creategrandstand');
-});
+})->name('creategrandstand');
 
-Route::post('/grandstand/new', [GrandstandController::class, 'store']);
+Route::post('/store-grandstand', [GrandstandController::class, 'store'])->name('store.grandstand');
 
