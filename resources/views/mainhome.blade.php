@@ -21,7 +21,7 @@
     <nav class="menu hidden" id="menu">
         <ul>
             <li><a href="#about">About</a></li>
-            <li><<a href="{{ route('loginhome') }}">Login</a></li>
+            <li><<a href="{{ route('login') }}">Login</a></li>
             </ul>
     </nav>
 
@@ -29,7 +29,7 @@
         <section class="hero-section">
             <div class="hero-text">
                 <h2>FORMULA 1 PIRELLI UNITED STATES GRAND PRIX 2024</h2>
-                <a href="{{ route('viewrace') }}" class="btn-primary">Buy Tickets</a>
+                <a href="{{ route('race') }}" class="btn-primary">Buy Tickets</a> <!-- TODO:send race id -->
             </div>
             <div class="hero-image">
                 <img src="path/to/your/image.jpg" alt="Race Image">

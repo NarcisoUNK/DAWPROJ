@@ -33,7 +33,7 @@
             </div>
             <button type="submit" class="btn-primary">Create Race</button>
         </form>
-        <a href="{{ route('creategrandstand') }}" class="btn-primary">ADD GRANDSTAND</a>
+        <a href="{{ route('/grandstand/new') }}" class="btn-primary">ADD GRANDSTAND</a>
     </main>
 
     <script>

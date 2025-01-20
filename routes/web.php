@@ -1,44 +1,40 @@
 <?php
 
-use App\Http\Resources\UserCollection;
-use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
-
 
 // Main home route
-Route::get('/mainhome', function () {
+Route::get('/', function () {
     return view('mainhome');
-})->name('mainhome'); // Named route: 'mainhome'
+});
 
 // Login home route
-Route::get('/loginhome', function () {
+Route::get('/login', function () {
     return view('loginhome');
-})->name('loginhome'); // Named route: 'loginhome'
+});
 
-Route::get('/viewrace', function () {
+Route::get('/race', function () {
     return view('viewrace');
-})->name('viewrace'); // Named route: 'viewrace'
+});
 
-Route::get('seatselection', function () {
+Route::get('/race/seats', function () {
     return view('seatselection');
-})->name('seatselection');
+});
 
 // Seller page route
 Route::get('/sellerpage', function () {
     return view('sellerpage');
 })->name('sellerpage'); // Named route: 'sellerpage'
 
-Route::get('/createrace', function () {
+Route::get('/race/new', function () {
     return view('createrace');
-})->name('createrace');
+});
 
-Route::post('/store-race', [RaceController::class, 'store'])->name('store.race');
+Route::post('/race/new', [RaceController::class, 'store']);
 
 // Create Grandstand
-Route::get('/creategrandstand', function () {
+Route::get('/grandstand/new', function () {
     return view('creategrandstand');
-})->name('creategrandstand');
+});
 
-Route::post('/store-grandstand', [GrandstandController::class, 'store'])->name('store.grandstand');
+Route::post('/grandstand/new', [GrandstandController::class, 'store']);
 

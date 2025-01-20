@@ -29,7 +29,7 @@
                 <div class="grandstand-card">
                     <p>Main Grandstands</p>
                     <p>From: €799.99</p>
-                    <a href="{{ route('seatselection') }}" class="btn-primary">Buy Tickets</a>
+                    <a href="{{ route('/race/seats') }}" class="btn-primary">Buy Tickets</a> <!-- TODO:send race and grandstand id -->
                 </div>
                 <div class="grandstand-card">
                     <p>Turn 1 Grandstands</p>

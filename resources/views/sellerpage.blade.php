@@ -35,7 +35,7 @@
 
         <section class="events-section">
             <h2>Grandstands</h2>
-            <a href="{{ route('createrace') }}" class="btn-primary">CREATE NEW RACE</a>
+            <a href="{{ route('race/new') }}" class="btn-primary">CREATE NEW RACE</a>
             <div class="events-container">
                 <div class="event-card">
                     <p>FORMULA 1 PIRELLI UNITED STATES GRAND PRIX 2024</p>
