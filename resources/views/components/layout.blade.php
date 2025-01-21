@@ -42,7 +42,23 @@
                 (encodeURIComponent(value) || '') +
                 expires +
                 '; path=/';
+        }
+        function deleteCookie(name) {
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        }
+
+        
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if(getCookie('id_user')!=undefined) {
+                document.getElementById('logout').hidden = false;
             }
+            logout.addEventListener('click', () => {
+                deleteCookie('id_user');
+                deleteCookie('perm');
+                window.location.href = '{{ url("/") }}';
+            });
+        });
     </script>
 </head>
 <body>
@@ -60,6 +76,7 @@
         <ul>
             <li><a href="#about">About</a></li>
             <li><a id="login" href="{{ url('/login') }}">Login</a></li>
+            <li id="logout" hidden><a>Logout</a></li>
         </ul>
     </nav>
     <script>
@@ -88,6 +105,7 @@
         // JavaScript for menu pop-up animation
         const menuIcon = document.getElementById('menu-icon');
         const menu = document.getElementById('menu');
+        const logout = document.getElementById('logout');
 
         menuIcon.addEventListener('click', () => {
             console.log('Menu icon clicked'); // Debugging statement
@@ -95,7 +113,6 @@
             menu.classList.toggle('hidden');
             console.log('Menu class after toggle:', menu.classList);
         });
-
         
     </script>
 </body>
