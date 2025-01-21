@@ -26,6 +26,30 @@ https://laravel.com/docs/11.x/sanctum#spa-authentication
 }
 ```
 
+`POST` /api/user/login
+> Requer autenticação
+
+&emsp; Devolve a verificação dos dados de login
+
+|Campo|Descrição||
+|:-|:-|-:|
+|username       |username do user       |_required_|
+|password       |password do user       |_required_|
+
+``` JSON
+{
+  "success":true,
+  "data":{
+    "id_user":1,
+    "username":"prom",
+    "email":"prom@prom.prom",
+    "permissions":"111",
+    "name":"prom"
+  },
+  "message":"Logged in."
+}
+```
+
 `POST` /api/user
 > Requer autenticação
 
