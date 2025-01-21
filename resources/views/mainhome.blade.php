@@ -1,41 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="{{ asset('app.css') }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<body>
-    <header class="header">
-        <h1>F1 Tickets</h1>
-        <div class="menu-icon" id="menu-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </header>
-
-    <!-- Pop-up Menu -->
-    <nav class="menu hidden" id="menu">
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><<a href="{{ route('login') }}">Login</a></li>
-            </ul>
-            <li><a href="{{ route('loginhome') }}">Login</a></li>
-        </ul>
-    </nav>
+<x-layout>
 
     <main class="main-content">
         <section class="hero-section" id="hero-section">
             <div class="hero-text">
-                <h2>FORMULA 1 PIRELLI UNITED STATES GRAND PRIX 2024</h2>
-                <a href="{{ route('race') }}" class="btn-primary">Buy Tickets</a> <!-- TODO:send race id -->
+                <h2 id="main-race-name">FORMULA 1 PIRELLI UNITED STATES GRAND PRIX 2024</h2>
+                <a id="main-race-link" href="{{ url('race') }}" class="btn-primary">Buy Tickets</a> <!-- TODO:send race id -->
             </div>
             <div class="hero-image">
-                <img src="path/to/your/image.jpg" alt="Race Image" id="main-race-image">
+                <img id="main-race-image" src="path/to/your/image.jpg" alt="Race Image" id="main-race-image" width=500>
             </div>
         </section>
 
@@ -59,7 +31,7 @@
                         document.getElementById('main-race-name').innerText = upcomingRace.race_name;
                         document.getElementById('main-race-link').href = `/viewrace/${upcomingRace.id_race}`;
                         // Update the image source if you have a specific image for each race
-                        // document.getElementById('main-race-image').src = `path/to/your/image/${upcomingRace.image}`;
+                        document.getElementById('main-race-image').src = `data:image/gif;base64,${upcomingRace.image}`;
                     } else {
                         document.getElementById('main-race-name').innerText = 'No upcoming races';
                     }
@@ -70,7 +42,7 @@
                         const eventCard = document.createElement('div');
                         eventCard.classList.add('event-card');
                         eventCard.innerHTML = `
-                            <img src="path/to/your/event.jpg" alt="${race.race_name}">
+                            <img src="data:image/gif;base64,${race.image}" alt="${race.race_name}">
                             <p>${race.race_name}</p>
                             <a href="/viewrace/${race.id_race}" class="btn-primary">Buy Tickets</a>
                         `;
@@ -93,5 +65,4 @@
             console.log('Menu class after toggle:', menu.classList);
         });
     </script>
-</body>
-</html>
+</x-layout>

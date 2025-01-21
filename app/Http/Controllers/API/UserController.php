@@ -38,4 +38,22 @@ class UserController extends BaseController
 
         return $this->sendResponse(new UserResource($user), 'User registered successfully.');
     }
+
+    public function check(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+
+        if ($user === null) {
+            return $this->sendError('User does not exist.');
+        }
+        if($user->password != $request->password){
+            return $this->sendError(false,'Wrong password.');
+        }
+        $data = [
+            'path' => '/'
+        ];
+        setcookie('perm',$user->permissions,$data);
+        setcookie('id_user',$user->id_user,$data);
+        return $this->sendResponse($user,'Logged in.');
+    }
 }

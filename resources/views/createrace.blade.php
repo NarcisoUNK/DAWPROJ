@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Race</title>
-    <link rel="stylesheet" href="{{ asset('app.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<body>
-    <header class="header">
-        <h1>F1 Tickets</h1>
-    </header>
+<x-layout>
 
     <main class="form-container">
         <h2>Create Race</h2>
@@ -57,5 +45,4 @@
             }
         });
     </script>
-</body>
-</html>
+</x-layout>

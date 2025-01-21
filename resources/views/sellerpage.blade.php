@@ -1,22 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sales Dashboard</title>
-    <link rel="stylesheet" href="{{ asset('app.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <header class="header">
-        <h1>F1 Tickets</h1>
-        <div class="menu-icon" id="menu-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </header>
-
+<x-layout>
     <main class="dashboard">
         <section class="graph-section">
             <canvas id="salesChart"></canvas>
@@ -78,5 +60,4 @@
             }
         });
     </script>
-</body>
-</html>
+</x-layout>
