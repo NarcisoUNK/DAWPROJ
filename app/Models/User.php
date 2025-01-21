@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,19 +10,13 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasApiTokens;
 
     protected $table = 'user';
+    protected $primaryKey = 'id_user'; // Set the primary key
     public $timestamps = false;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    
-     protected $fillable = [
+    protected $fillable = [
         'username',
         'email',
         'password',
@@ -31,22 +24,17 @@ class User extends Authenticatable
         'name',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
     ];
 
     public function races(): HasMany
     {
-        return $this->hasMany(Race::class, 'id_race','id_race');
+        return $this->hasMany(Race::class, 'id_user', 'id_user');
     }
 
     public function tickets(): HasMany
     {
-        return $this->hasMany(Ticket::class, 'id_ticket','id_ticket');
+        return $this->hasMany(Ticket::class, 'id_user', 'id_user');
     }
 }

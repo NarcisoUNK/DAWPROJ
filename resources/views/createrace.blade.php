@@ -1,8 +1,10 @@
-<x-layout>
 
+<style></style>
+<x-layout>
     <main class="form-container">
         <h2>Create Race</h2>
-        <form id="createRaceForm">
+        <form id="createRaceForm" method="POST" action="{{ route('race.store') }}">
+            @csrf
             <div class="form-group">
                 <label for="race_name">Race Name</label>
                 <input type="text" id="race_name" name="race_name" required>
@@ -21,28 +23,27 @@
             </div>
             <button type="submit" class="btn-primary">Create Race</button>
         </form>
-        <a href="{{ route('/grandstand/new') }}" class="btn-primary">ADD GRANDSTAND</a>
     </main>
-
-    <script>
-        document.getElementById('createRaceForm').addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            const formData = {
-                race_name: document.getElementById('race_name').value,
-                year: document.getElementById('year').value,
-                country: document.getElementById('country').value,
-                city: document.getElementById('city').value,
-            };
-
-            try {
-                const response = await axios.post('http://your-api-url/api/races', formData);
-                alert('Race created successfully!');
-                window.location.href = '/dashboard'; // Redirecionar de volta para o dashboard
-            } catch (error) {
-                console.error('Error creating race:', error);
-                alert('Failed to create race. Please try again.');
-            }
-        });
-    </script>
 </x-layout>
+
+<script>
+    document.getElementById('createRaceForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const formData = {
+            race_name: document.getElementById('race_name').value,
+            year: document.getElementById('year').value,
+            country: document.getElementById('country').value,
+            city: document.getElementById('city').value,
+        };
+
+        try {
+            const response = await axios.post('{{ route('race.store') }}', formData);
+            alert('Race created successfully!');
+            window.location.href = '{{ route('sellerpage') }}'; // Redirect back to the seller page
+        } catch (error) {
+            console.error('Error creating race:', error);
+            alert('Failed to create race. Please try again.');
+        }
+    });
+</script>

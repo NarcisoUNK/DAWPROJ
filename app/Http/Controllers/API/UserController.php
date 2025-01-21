@@ -21,6 +21,15 @@ class UserController extends BaseController
         ];
     }
 
+    public function get($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return $this->sendError('User not found.');
+        }
+        return $this->sendResponse(new UserResource($user), 'User retrieved successfully.');
+    }
+
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), $this->validationRules);
@@ -34,6 +43,7 @@ class UserController extends BaseController
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'name' => $request->name,
+            'permissions' => '000', // Set default permissions for new users
         ]);
 
         return $this->sendResponse(new UserResource($user), 'User registered successfully.');
@@ -46,24 +56,18 @@ class UserController extends BaseController
         if ($user === null) {
             return $this->sendError('User does not exist.');
         }
-        if($user->password != $request->password){
-            return $this->sendError(false,'Wrong password.');
+        if (!Hash::check($request->password, $user->password)) {
+            return $this->sendError('Wrong password.');
         }
         
         $data = [
-            'path' => '/'
+            'path' => '/',
+            'expires' => time() + (86400 * 30), // 30 days
         ];
 
-        if(!isset($_COOKIE['perm']))
-            setcookie('perm',$user->permissions,$data);
-        else
-            $_COOKIE['perm'] = $user->permissions;
+        setcookie('perm', $user->permissions, $data);
+        setcookie('id_user', $user->id_user, $data);
 
-        if(!isset($_COOKIE['id_user']))
-            setcookie('id_user',$user->id_user,$data);
-        else
-            $_COOKIE['id_user'] = $user->permissions;
-
-        return $this->sendResponse($user,'Logged in.');
+        return $this->sendResponse($user, 'Logged in.');
     }
 }

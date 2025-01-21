@@ -1,8 +1,20 @@
-<x-layout>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ asset('login.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <h1>F1 Tickets</h1>
+    </header>
 
     <main class="form-container">
         <h2>Login</h2>
-        <form id="login-form" method="POST" action="{{ url('') }}">
+        <form id="login-form" method="POST" action="{{ route('user.login') }}">
             @csrf
             <div class="form-group">
                 <label for="email">Email</label>
@@ -11,7 +23,6 @@
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                <p id="error-message" hidden>Dados errados!</p>
             </div>
             <button type="submit" class="btn-primary">Login</button>
             <p class="forgot-password">
@@ -19,7 +30,7 @@
             </p>
         </form>
         <div class="register-link">
-            <p>Don't have an account? <a href="{{ url('register') }}" class="btn-secondary">Register</a></p>
+            <p>Don't have an account? <a href="{{ route('register') }}" class="btn-secondary">Register</a></p>
         </div>
     </main>
 
@@ -51,21 +62,27 @@
             const url = form.getAttribute('action');
             const method = form.getAttribute('method');
             
-            await fetch(url+'/api/user/login', {
+            await fetch(url, {
                 method: method,
                 body: formData
-            }).then(response => {
-                if(!response.ok){
-                    document.getElementById('error-message').removeAttribute('hidden');
-                }else{
-                    fetch(url+'/sanctum/csrf-cookie', {
-                        method: 'GET'
-                    }).then(data => {
-                        window.location.replace(url);
-                    });
+            }).then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = data.redirectUrl;
+                } else {
+                    const errorMessage = document.getElementById('error-message');
+                    if (errorMessage) {
+                        errorMessage.removeAttribute('hidden');
+                    }
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                const errorMessage = document.getElementById('error-message');
+                if (errorMessage) {
+                    errorMessage.removeAttribute('hidden');
                 }
             });
         });
-
     </script>
-</x-layout>
+</body>
+</html>
