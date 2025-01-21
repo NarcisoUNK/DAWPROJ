@@ -49,11 +49,21 @@ class UserController extends BaseController
         if($user->password != $request->password){
             return $this->sendError(false,'Wrong password.');
         }
+        
         $data = [
             'path' => '/'
         ];
-        setcookie('perm',$user->permissions,$data);
-        setcookie('id_user',$user->id_user,$data);
+
+        if(!isset($_COOKIE['perm']))
+            setcookie('perm',$user->permissions,$data);
+        else
+            $_COOKIE['perm'] = $user->permissions;
+
+        if(!isset($_COOKIE['id_user']))
+            setcookie('id_user',$user->id_user,$data);
+        else
+            $_COOKIE['id_user'] = $user->permissions;
+
         return $this->sendResponse($user,'Logged in.');
     }
 }

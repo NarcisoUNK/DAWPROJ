@@ -19,11 +19,11 @@ class Ticket extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id','user_id');
+        return $this->belongsTo(User::class, 'id_user','id_user');
     }
 
     public function seat(): HasOne
     {
-        return $this->HasOne(Seat::class, 'seat_id','seat_id');
+        return $this->HasOne(Seat::class, 'id_seat','id_seat')->with('grandstand');
     }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>F1Tickets</title>
     <link rel="stylesheet" href="{{ asset('app.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -47,7 +47,7 @@
 </head>
 <body>
     <header class="header">
-        <h1><a href="{{ url('/') }}">F1 Tickets</a></h1>
+        <h1><a id="home" href="{{ url('/') }}">F1 Tickets</a></h1>
         <div class="menu-icon" id="menu-icon">
             <span></span>
             <span></span>
@@ -63,16 +63,25 @@
         </ul>
     </nav>
     <script>
-        if(getCookie('XSRF-TOKEN')) {
-            document.getElementById('login').innerText = 'Account';
+        window.addEventListener('DOMContentLoaded', async function() {
+            if(getCookie('XSRF-TOKEN')) {
+                const id_user = getCookie('id_user');
+                const url = document.getElementById('home').href;
+                axios.get(url+'api/user/'+id_user)
+                .then(data => {
+                    const user = data.data.data;
+                    
+                    document.getElementById('login').innerText = user.name;
 
-            const perm = getCookie('perm');
-            
-            if(perm == "111")
-                document.getElementById('login').href = '{{ url("sellerpage") }}';
-            else
-                document.getElementById('login').href = '{{ url("userpage") }}';
-        }
+                    const perm = getCookie('perm');
+
+                    if(perm == "111")
+                        document.getElementById('login').href = '{{ url("sellerpage") }}';
+                    else
+                        document.getElementById('login').href = '{{ url("userpage") }}';
+                });
+            }
+        });
     </script>
     {{ $slot }}
     <script>

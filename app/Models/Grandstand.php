@@ -19,11 +19,11 @@ class Grandstand extends Model
 
     public function race(): BelongsTo
     {
-        return $this->belongsTo(Race::class, 'race_id','race_id');
+        return $this->belongsTo(Race::class, 'id_race','id_race');
     }
 
     public function seats(): HasMany
     {
-        return $this->hasMany(Seat::class, 'seat_id','seat_id');
+        return $this->hasMany(Seat::class, 'id_grandstand','id_grandstand')->with('race');
     }
 }

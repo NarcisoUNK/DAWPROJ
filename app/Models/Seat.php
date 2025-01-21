@@ -19,11 +19,11 @@ class Seat extends Model
 
     public function grandstand(): BelongsTo
     {
-        return $this->belongsTo(Grandstand::class, 'grandstand_id','grandstand_id');
+        return $this->belongsTo(Grandstand::class, 'id_grandstand','id_grandstand')->with('race');
     }
 
     public function ticket(): HasOne
     {
-        return $this->HasOne(Ticket::class, 'ticket_id','ticket_id');
+        return $this->HasOne(Ticket::class, 'id_seat','id_seat');
     }
 }

@@ -19,7 +19,7 @@ class TicketController extends BaseController
     }
 
     public function get_all_by_user(Request $request, $user) {
-        $tickets = Ticket::where('id_user', $user)->get();
+        $tickets = Ticket::where('id_user', $user)->with('seat')->get();
         return $this->sendResponse($tickets, 'Retrieved successfully.');
     }
 }
