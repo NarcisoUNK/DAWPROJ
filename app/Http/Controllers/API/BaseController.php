@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
   
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller as Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
   
 class BaseController extends Controller
@@ -87,6 +88,7 @@ class BaseController extends Controller
             }
             $input['password'] = bcrypt($input['password']);
         }
+
         $row = $this->model::create($input);
         
         return $this->sendResponse(new $this->resource($row), 'Created successfully.');

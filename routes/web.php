@@ -47,8 +47,12 @@ Route::get('/grandstand/{id}/seats', function ($id) {
 Route::get('/sellerpage', function () {
     return view('sellerpage');
 })->name('sellerpage');
-Route::get('/race/new', [RaceController::class, 'create'])->name('race.new');
-Route::post('/race', [RaceController::class, 'store'])->name('race.store');
+
+Route::get('/race/new', function(){
+    return view('createrace');
+})->name('race.new');
+
+
 // Create Grandstand route
 Route::get('/creategrandstand', function () {
     return view('creategrandstand');

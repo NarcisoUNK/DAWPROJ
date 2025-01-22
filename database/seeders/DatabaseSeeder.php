@@ -20,13 +20,13 @@ class DatabaseSeeder extends Seeder
 
         DB::table('user')->insert([[
             'username' => 'prom',
-            'password' => 'prom',
+            'password' => bcrypt('prom'),
             'email' => 'prom@prom.prom',
             'permissions' => 111,
             'name' => 'prom',
         ],[
             'username' => 'client',
-            'password' => 'client',
+            'password' => bcrypt('client'),
             'email' => 'client@client.client',
             'permissions' => 111,
             'name' => 'client',

@@ -4,7 +4,14 @@
 Na API, para adicionar ou eliminar qualquer tipo de dados é preciso autenticar usando:
 https://laravel.com/docs/11.x/sanctum#spa-authentication
 
-#TODO: exemplos de request dos POSTs
+# ATENCAO
+Mudar a configuração do mysql (my.init) a seguinte variavel
+``` ini
+[mysqld]
+...
+max_allowed_packet=512M
+...
+```
 
 ## API
 ### Users

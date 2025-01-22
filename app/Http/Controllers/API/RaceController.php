@@ -12,7 +12,7 @@ class RaceController extends BaseController
         $this->model = Race::class;
         $this->resource = RaceResource::class;
         $this->validationRules = [
-            'id_user' => 'required|exists:users,id_user',
+            'id_user' => 'required|exists:user,id_user',
             'race_name' => 'required|string',
             'year' => 'required|integer',
             'country' => 'required|string',
@@ -34,33 +34,6 @@ class RaceController extends BaseController
             ],
             'message' => 'Races retrieved successfully.'
         ]);
-    }
-    public function create()
-    {
-        return view('createrace');
-    }
-
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'race_name' => 'required|string|max:255',
-            'year' => 'required|integer',
-            'country' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
-        ]);
-
-        Race::create([
-            'race_name' => $request->race_name,
-            'year' => $request->year,
-            'country' => $request->country,
-            'city' => $request->city,
-            'id_user' => auth()->id(), // Assuming the user is authenticated
-            'image' => '', // Add logic to handle image upload if necessary
-            'circuit' => '', // Add logic to handle circuit upload if necessary
-        ]);
-
-        return redirect()->route('sellerpage')->with('success', 'Race created successfully.');
     }
     
     
