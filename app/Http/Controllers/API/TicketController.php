@@ -33,4 +33,16 @@ class TicketController extends BaseController
 
         return response()->json(['data' => $ticket, 'message' => 'Ticket created successfully.'], 201);
     }
+
+    public function get_all_by_race(Request $request, $race) {
+        $tickets = Ticket::with('seat')->get();
+        
+        foreach ($tickets as $key=>$ticket) {
+            if($ticket->seat->grandstand->race->id_race != $race) {
+                $tickets->forget($key);
+            }
+        }
+
+        return $this->sendResponse($tickets, 'Retrieved successfully.');
+    }
 }
