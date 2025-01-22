@@ -27,6 +27,7 @@
             data:{
                 labels: [],
                 datasets: [{
+                    label: 'Sales',
                     data: [],
                 }]
             },
