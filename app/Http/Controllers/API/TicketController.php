@@ -22,4 +22,16 @@ class TicketController extends BaseController
         $tickets = Ticket::where('id_user', $user)->with('seat')->get();
         return $this->sendResponse($tickets, 'Retrieved successfully.');
     }
+
+    public function get_all_by_race(Request $request, $race) {
+        $tickets = Ticket::with('seat')->get();
+        
+        foreach ($tickets as $key=>$ticket) {
+            if($ticket->seat->grandstand->race->id_race != $race) {
+                $tickets->forget($key);
+            }
+        }
+
+        return $this->sendResponse($tickets, 'Retrieved successfully.');
+    }
 }
