@@ -16,8 +16,9 @@
         </section>
 
         <section class="events-section">
-            <h2>Grandstands</h2>
+            <h2>Races</h2>
             <a href="{{ route('race.new') }}" class="btn-primary">CREATE NEW RACE</a>
+            <a href="{{ route('creategrandstand') }}" class="btn-primary">CREATE NEW GRANDSTAND</a>
             <div id="events-container" class="events-container">
             </div>
         </section>
