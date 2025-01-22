@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'client',
             'password' => bcrypt('client'),
             'email' => 'client@client.client',
-            'permissions' => 111,
+            'permissions' => 000,
             'name' => 'client',
         ]]);
 
