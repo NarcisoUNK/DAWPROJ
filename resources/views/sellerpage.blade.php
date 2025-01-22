@@ -18,24 +18,31 @@
         <section class="events-section">
             <h2>Grandstands</h2>
             <a href="{{ route('race.new') }}" class="btn-primary">CREATE NEW RACE</a>
-            <div class="events-container">
-                <div class="event-card">
-                    <p>FORMULA 1 PIRELLI UNITED STATES GRAND PRIX 2024</p>
-                    <button class="btn-info">Info</button>
-                </div>
-                <div class="event-card">
-                    <p>FORMULA 1 MEXICO GRAND PRIX 2024</p>
-                    <button class="btn-info">Info</button>
-                </div>
-                <div class="event-card">
-                    <p>FORMULA 1 BRAZIL GRAND PRIX 2024</p>
-                    <button class="btn-info">Info</button>
-                </div>
+            <div id="events-container" class="events-container">
             </div>
         </section>
     </main>
 
     <script>
+        axios.get('/api/user/'+getCookie('id_user')+'/races').then(function(response) {
+            const races = response.data.data;
+
+            // Update the events section
+            const eventsContainer = document.getElementById('events-container');
+            races.forEach(function(race) {
+                const eventCard = document.createElement('div');
+                eventCard.classList.add('event-card');
+                eventCard.innerHTML = `
+                    <img width=300 src="data:image/gif;base64,${race.image}" alt="${race.race_name}">
+                    <p>${race.race_name}</p>
+                    <a href="/viewrace/${race.id_race}" class="btn-primary">Info</a>
+                `;
+                eventsContainer.appendChild(eventCard);
+            });
+        }).catch(function(error) {
+            console.error('Error fetching races:', error);
+        });
+
         // Chart.js script for sales graph
         const ctx = document.getElementById('salesChart').getContext('2d');
         const salesChart = new Chart(ctx, {

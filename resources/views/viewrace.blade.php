@@ -3,7 +3,7 @@
     <main class="race-details">
         <section class="hero-section">
             <div class="hero-image">
-                <img src="path/to/circuit-image.jpg" alt="Circuit Image">
+                <img id="race-image" alt="Race Image" width=300>
             </div>
             <div class="race-info">
                 <h2 id="race-name">Loading...</h2>
@@ -17,6 +17,7 @@
             <div class="grandstands-container">
                 <!-- Grandstands will be dynamically loaded here -->
             </div>
+            <img id="circuit" alt="Circuit Image" width=300>
         </section>
     </main>
 
@@ -30,6 +31,8 @@
                     document.getElementById('race-name').innerText = race.race_name;
                     document.getElementById('race-year').innerText = race.year;
                     document.getElementById('race-location').innerText = `${race.city}, ${race.country}`;
+                    document.getElementById('circuit').src = `data:image/gif;base64,${race.circuit}`;
+                    document.getElementById('race-image').src = `data:image/gif;base64,${race.image}`;
                 })
                 .catch(function(error) {
                     console.error('Error fetching race:', error);

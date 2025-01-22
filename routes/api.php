@@ -16,6 +16,7 @@ Route::post('/user', [UserController::class, 'add'])->middleware(['auth:sanctum'
 # RACE ROUTES
 Route::get('/races', [RaceController::class, 'index']);
 Route::get('/race/{id}', [RaceController::class, 'show']);
+Route::get('/user/{id_user}/races', [RaceController::class, 'user_races']);
 Route::post('/race', [RaceController::class, 'add'])->middleware(['auth:sanctum']);
 Route::get('/race/delete/{id}', [RaceController::class, 'delete'])->middleware(['auth:sanctum']);
 
