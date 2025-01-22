@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers\API;
 
 use App\Http\Resources\GrandstandResource;
@@ -14,6 +15,7 @@ class GrandstandController extends BaseController
         $this->validationRules = [
             'id_race' => 'required|integer',
             'name' => 'required|string',
+            'price' => 'required|numeric', // Add validation for price
         ];
     }
 

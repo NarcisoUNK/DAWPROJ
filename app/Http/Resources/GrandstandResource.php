@@ -14,6 +14,11 @@ class GrandstandResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id_grandstand' => $this->id_grandstand,
+            'id_race' => $this->id_race,
+            'name' => $this->name,
+            'price' => $this->price, // Add the price attribute
+        ];
     }
 }
