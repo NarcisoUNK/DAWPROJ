@@ -14,8 +14,7 @@ class GrandstandController extends BaseController
         $this->resource = GrandstandResource::class;
         $this->validationRules = [
             'id_race' => 'required|integer',
-            'name' => 'required|string',
-            'price' => 'required|numeric', // Add validation for price
+            'name' => 'required|string'
         ];
     }
 

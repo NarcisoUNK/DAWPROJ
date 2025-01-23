@@ -67,13 +67,13 @@
                 .then(function(response) {
                     const grandstands = response.data.data;
                     const grandstandsContainer = document.querySelector('.grandstands-container');
-                    grandstands.forEach(function(grandstand) {
+                    // Check if there are grandstands
+                    if (grandstands.length == 0) {
+                        grandstandsContainer.innerHTML = `<p>No grandstands available for this race.</p>`;
+                        return;
+                    }
+                    grandstands.forEach(function(grandstand) {console.log(grandstand);
                         const grandstandCard = document.createElement('div');
-                        // Check if there are grandstands
-                        if (grandstands.length === 0) {
-                            grandstandsContainer.innerHTML = `<p>No grandstands available for this race.</p>`;
-                            return;
-                        }
                         grandstandCard.classList.add('grandstand-card');
                         let lowestPrice = Infinity;
                         grandstand.seats.forEach(function(seat) {

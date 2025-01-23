@@ -18,7 +18,7 @@ class GrandstandResource extends JsonResource
             'id_grandstand' => $this->id_grandstand,
             'id_race' => $this->id_race,
             'name' => $this->name,
-            'price' => $this->price, // Add the price attribute
+            'seats' => SeatResource::collection($this->seats)
         ];
     }
 }

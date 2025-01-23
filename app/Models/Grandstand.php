@@ -13,8 +13,7 @@ class Grandstand extends Model
 
     protected $fillable = [
         'id_race',
-        'name',
-        'price', // Ensure price is fillable
+        'name'
     ];
 
     public function race(): BelongsTo
@@ -24,6 +23,6 @@ class Grandstand extends Model
 
     public function seats(): HasMany
     {
-        return $this->hasMany(Seat::class, 'id_grandstand','id_grandstand');
+        return $this->hasMany(Seat::class, 'id_grandstand','id_grandstand')->with('ticket');
     }
 }
