@@ -46,8 +46,15 @@
                     grandstands.forEach(function(grandstand) {
                         const grandstandCard = document.createElement('div');
                         grandstandCard.classList.add('grandstand-card');
+                        let lowestPrice = Infinity;
+                        grandstand.seats.forEach(function(seat) {
+                            if (seat.price < lowestPrice) {
+                                lowestPrice = seat.price;
+                            }
+                        });
                         grandstandCard.innerHTML = `
                             <p>${grandstand.name}</p>
+                            <p>Price: ${lowestPrice}€</p>
                             <a href="/grandstand/${grandstand.id_grandstand}/seats" class="btn-primary">Buy Tickets</a>
                         `;
                         grandstandsContainer.appendChild(grandstandCard);

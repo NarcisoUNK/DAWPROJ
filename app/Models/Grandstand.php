@@ -24,6 +24,6 @@ class Grandstand extends Model
 
     public function seats(): HasMany
     {
-        return $this->hasMany(Seat::class, 'id_grandstand','id_grandstand')->with('race');
+        return $this->hasMany(Seat::class, 'id_grandstand','id_grandstand');
     }
 }
