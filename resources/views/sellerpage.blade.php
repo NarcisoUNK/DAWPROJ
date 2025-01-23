@@ -1,12 +1,13 @@
 <x-layout>
+    <link rel="stylesheet" href="{{ asset('sellerpage.css') }}">
     <main class="dashboard">
         <section class="graph-section">
             <canvas id="salesChart"></canvas>
         </section>
 
         <section class="stats-section">
-            <div id ="salesChart" class="stats-card">
-                
+            <div id="salesChart" class="stats-card">
+                <!-- Sales chart will be rendered here -->
             </div>
         </section>
 
@@ -15,6 +16,26 @@
             <a href="{{ route('race.new') }}" class="btn-primary">CREATE NEW RACE</a>
             <a href="{{ route('creategrandstand') }}" class="btn-primary">CREATE NEW GRANDSTAND</a>
             <div id="events-container" class="events-container">
+                <!-- Races will be dynamically loaded here -->
+            </div>
+        </section>
+
+        <section class="races-section">
+            <h2>All Races</h2>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Race Name</th>
+                            <th>Year</th>
+                            <th>Location</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="races-table-body">
+                        <!-- Races will be dynamically loaded here -->
+                    </tbody>
+                </table>
             </div>
         </section>
     </main>
@@ -29,6 +50,9 @@
                 datasets: [{
                     label: 'Sales',
                     data: [],
+                    backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                    borderColor: 'rgba(0, 123, 255, 1)',
+                    borderWidth: 1
                 }]
             },
             options: {
@@ -57,7 +81,6 @@
                 `;
                 eventsContainer.appendChild(eventCard);
 
-                
                 axios.get('/api/race/'+race.id_race+'/tickets').then(function(response) {      
                     const tickets = response.data.data;
                     let totalSales = 0;
@@ -75,11 +98,57 @@
                 });
             });
 
-            
+            // Update the races table
+            const racesTableBody = document.getElementById('races-table-body');
+            races.forEach(function(race) {
+                const raceRow = document.createElement('tr');
+                raceRow.innerHTML = `
+                    <td>${race.race_name}</td>
+                    <td>${race.year}</td>
+                    <td>${race.city}, ${race.country}</td>
+                    <td>
+                        <a href="/viewrace/${race.id_race}" class="btn-edit">Edit</a>
+                        <button class="btn-delete" onclick="deleteRace(${race.id_race})">Delete</button>
+                    </td>
+                `;
+                racesTableBody.appendChild(raceRow);
+            });
+
         }).catch(function(error) {
             console.error('Error fetching races:', error);
         });
 
-        
+        function deleteRace(raceId) {
+            if (confirm('Are you sure you want to delete this race?')) {
+                axios.get(`/api/race/delete/${raceId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${getCookie('auth_token')}`
+                    }
+                }).then(function(response) {
+                    alert('Race deleted successfully!');
+                    location.reload();
+                }).catch(function(error) {
+                    console.error('Error deleting race:', error);
+                    alert('Failed to delete race.');
+                });
+            }
+        }
+
+        function getCookie(name) {
+            const nameEquals = name + '=';
+            const cookieArray = document.cookie.split(';');
+
+            for (let cookie of cookieArray) {
+                while (cookie.charAt(0) == ' ') {
+                    cookie = cookie.slice(1, cookie.length);
+                }
+
+                if (cookie.indexOf(nameEquals) == 0) {
+                    return decodeURIComponent(cookie.slice(nameEquals.length, cookie.length));
+                }
+            }
+
+            return null;
+        }
     </script>
 </x-layout>
