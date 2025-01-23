@@ -21,7 +21,7 @@ class TicketController extends BaseController
     {
         $request->validate([
             'id_seat' => 'required|exists:seat,id_seat',
-            'id_user' => 'required|exists:users,id_user',
+            'id_user' => 'required|exists:user,id_user',
             'final_price' => 'required|numeric',
         ]);
 
@@ -42,7 +42,13 @@ class TicketController extends BaseController
                 $tickets->forget($key);
             }
         }
+        
 
         return $this->sendResponse($tickets, 'Retrieved successfully.');
+    }
+    public function get_all_by_user($id)
+    {
+        $tickets = Ticket::with('seat.grandstand.race')->where('id_user', $id)->get();
+        return response()->json(['data' => TicketResource::collection($tickets), 'message' => 'Tickets retrieved successfully.']);
     }
 }

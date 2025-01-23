@@ -14,6 +14,9 @@
                         <th>Price</th>
                     </tr>
                 </thead>
+                <tbody>
+                    <!-- Tickets will be dynamically generated here -->
+                </tbody>
             </table>
     </main>
     <script>
@@ -49,7 +52,8 @@
                     axios.get('/api/user/' + user.id_user + '/tickets')
                     .then(function(response) {
                         const tickets = response.data.data;
-                        const ticketsContainer = document.getElementById('tickets');
+                        console.log('Tickets data:', tickets); // Debugging statement
+                        const ticketsContainer = document.getElementById('tickets').getElementsByTagName('tbody')[0];
 
                         for (const ticket of tickets) {
                             const ticketItem = document.createElement('tr');

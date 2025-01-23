@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Ticket extends Model
 {
@@ -19,11 +18,11 @@ class Ticket extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'id_user','id_user');
+        return $this->belongsTo(User::class, 'id_user', 'id_user');
     }
 
-    public function seat(): HasOne
+    public function seat(): BelongsTo
     {
-        return $this->HasOne(Seat::class, 'id_seat','id_seat')->with('grandstand');
+        return $this->belongsTo(Seat::class, 'id_seat', 'id_seat');
     }
 }
