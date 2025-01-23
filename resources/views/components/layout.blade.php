@@ -56,6 +56,8 @@
             logout.addEventListener('click', () => {
                 deleteCookie('id_user');
                 deleteCookie('perm');
+                deleteCookie('laravel_session');
+                deleteCookie('XSRF-TOKEN');
                 window.location.href = '{{ url("/") }}';
             });
         });
