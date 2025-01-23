@@ -38,8 +38,10 @@ Route::get('/seat/delete/{id}', [SeatController::class, 'delete'])->middleware([
 Route::get('/race/{id}/tickets', [TicketController::class, 'get_all_by_race']);
 Route::get('/user/{id}/tickets', [TicketController::class, 'get_all_by_user']);
 Route::get('/ticket/{id}', [TicketController::class, 'get']);
+Route::get('/tickets/seats', [TicketController::class, 'get_seats_with_tickets']);
 Route::post('/ticket', [TicketController::class, 'add'])->middleware(['auth:sanctum']);
 Route::get('/ticket/delete/{id}', [TicketController::class, 'delete'])->middleware(['auth:sanctum']);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/{id}/sales', [SalesController::class, 'getSalesData']);
 });

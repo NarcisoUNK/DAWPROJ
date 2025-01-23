@@ -341,6 +341,34 @@ max_allowed_packet=512M
 }
 ```
 
+`GET` /api/tickets/seats
+
+&emsp; Devolve todos os bilhetes com a informação dos lugares
+``` JSON
+{
+  "success": true,
+  "data": [
+    {
+      "id_ticket": 1,
+      "id_seat": 33,
+      "id_user": 2,
+      "final_price": 430.49,
+      "seat": {
+        "id_seat": 33,
+        "id_grandstand": 1,
+        "n_seat_grandstand": "33",
+        "price": 430.49,
+        "grandstand": {
+          ...
+        }
+      }
+    },
+    ...
+  ],
+  "message": "Retrieved successfully."
+}
+```
+
 `POST` /api/ticket
 > Requer autenticação
 

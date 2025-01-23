@@ -46,6 +46,12 @@ class TicketController extends BaseController
 
         return $this->sendResponse($tickets, 'Retrieved successfully.');
     }
+
+    public function get_seats_with_tickets() {
+        $tickets = Ticket::with('seat')->get();
+        return $this->sendResponse($tickets, 'Ticket retrieved successfully.');
+    }
+    
     public function get_all_by_user($id)
     {
         $tickets = Ticket::with('seat.grandstand.race')->where('id_user', $id)->get();
