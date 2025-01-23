@@ -17,10 +17,21 @@ class TicketController extends BaseController
             'final_price' => 'required|numeric'
         ];
     }
+    public function create(Request $request)
+    {
+        $request->validate([
+            'id_seat' => 'required|exists:seat,id_seat',
+            'id_user' => 'required|exists:users,id_user',
+            'final_price' => 'required|numeric',
+        ]);
 
-    public function get_all_by_user(Request $request, $user) {
-        $tickets = Ticket::where('id_user', $user)->with('seat')->get();
-        return $this->sendResponse($tickets, 'Retrieved successfully.');
+        $ticket = Ticket::create([
+            'id_seat' => $request->id_seat,
+            'id_user' => $request->id_user,
+            'final_price' => $request->final_price,
+        ]);
+
+        return response()->json(['data' => $ticket, 'message' => 'Ticket created successfully.'], 201);
     }
 
     public function get_all_by_race(Request $request, $race) {

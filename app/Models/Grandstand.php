@@ -8,18 +8,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Grandstand extends Model
 {
-
     protected $table = 'grandstand';
     public $timestamps = false;
 
     protected $fillable = [
         'id_race',
         'name',
+        'price', // Ensure price is fillable
     ];
 
     public function race(): BelongsTo
     {
-        return $this->belongsTo(Race::class, 'id_race','id_race');
+        return $this->belongsTo(Race::class, 'id_race', 'id_race');
     }
 
     public function seats(): HasMany

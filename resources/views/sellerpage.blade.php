@@ -13,6 +13,19 @@
         <section class="events-section">
             <h2>Races</h2>
             <a href="{{ route('race.new') }}" class="btn-primary">CREATE NEW RACE</a>
+            <div class="events-container">
+                <div class="event-card">
+                    <p>FORMULA 1 PIRELLI UNITED STATES GRAND PRIX 2024</p>
+                    <button class="btn-info">Info</button>
+                </div>
+                <div class="event-card">
+                    <p>FORMULA 1 MEXICO GRAND PRIX 2024</p>
+                    <button class="btn-info">Info</button>
+                </div>
+                <div class="event-card">
+                    <p>FORMULA 1 BRAZIL GRAND PRIX 2024</p>
+                    <button class="btn-info">Info</button>
+                </div>
             <a href="{{ route('creategrandstand') }}" class="btn-primary">CREATE NEW GRANDSTAND</a>
             <div id="events-container" class="events-container">
             </div>
@@ -20,6 +33,29 @@
     </main>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        // Chart.js script for sales graph
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        const salesChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Sales (€)',
+                    data: [120000, 140000, 150000, 170000, 200000, 230000, 250000, 270000, 290000, 310000, 330000, 350000],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
     // Chart.js script for sales graph
         const ctx = document.getElementById('salesChart').getContext('2d');
         let salesChart = new Chart(ctx, {

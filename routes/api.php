@@ -16,7 +16,6 @@ Route::post('/user', [UserController::class, 'add'])->middleware(['auth:sanctum'
 # RACE ROUTES
 Route::get('/races', [RaceController::class, 'index']);
 Route::get('/race/{id}', [RaceController::class, 'show']);
-Route::get('/user/{id_user}/races', [RaceController::class, 'user_races']);
 Route::post('/race', [RaceController::class, 'add'])->middleware(['auth:sanctum']);
 Route::get('/race/delete/{id}', [RaceController::class, 'delete'])->middleware(['auth:sanctum']);
 
@@ -33,8 +32,9 @@ Route::post('/seat', [SeatController::class, 'add'])->middleware(['auth:sanctum'
 Route::get('/seat/delete/{id}', [SeatController::class, 'delete'])->middleware(['auth:sanctum']);
 
 # TICKET ROUTES
+
 Route::get('/user/{id}/tickets', [TicketController::class, 'get_all_by_user']);
 Route::get('/race/{id}/tickets', [TicketController::class, 'get_all_by_race']);
 Route::get('/ticket/{id}', [TicketController::class, 'get']);
-Route::post('/ticket', [TicketController::class, 'add'])->middleware(['auth:sanctum']);
+Route::post('/ticket', [TicketController::class, 'create'])->middleware(['auth:sanctum']);
 Route::get('/ticket/delete/{id}', [TicketController::class, 'delete'])->middleware(['auth:sanctum']);

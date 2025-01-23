@@ -36,6 +36,7 @@ class RaceController extends BaseController
         ]);
     }
     
+    
     public function show($id)
     {
         $race = Race::findOrFail($id);
@@ -44,10 +45,5 @@ class RaceController extends BaseController
             'data' => new RaceResource($race),
             'message' => 'Race retrieved successfully.'
         ]);
-    }
-
-    public function user_races($id_user){
-        $races = Race::where('id_user', $id_user)->get();
-        return $this->sendResponse(RaceResource::collection($races),'Races retrieved successfully');
     }
 }
