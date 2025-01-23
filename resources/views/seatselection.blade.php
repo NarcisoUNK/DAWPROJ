@@ -24,19 +24,26 @@
                         seatElement.classList.add('seat');
                         seatElement.innerText = seat.n_seat_grandstand;
 
-                        // Randomly mark some seats as taken
-                        if (Math.random() < 0.3) { // 30% chance to mark as taken
-                            seatElement.classList.add('taken');
-                        } else {
-                            seatElement.addEventListener('click', function() {
-                                if (selectedSeat) {
-                                    selectedSeat.classList.remove('selected');
+                        // Check if the seat has a ticket
+                        axios.get(`/api/ticket/seat/${seat.id_seat}`)
+                            .then(function(ticketResponse) {
+                                const tickets = ticketResponse.data.data;
+                                if (tickets.length > 0) {
+                                    seatElement.classList.add('taken');
+                                } else {
+                                    seatElement.addEventListener('click', function() {
+                                        if (selectedSeat) {
+                                            selectedSeat.classList.remove('selected');
+                                        }
+                                        seatElement.classList.add('selected');
+                                        selectedSeat = seatElement;
+                                        buyButton.style.display = 'block';
+                                    });
                                 }
-                                seatElement.classList.add('selected');
-                                selectedSeat = seatElement;
-                                buyButton.style.display = 'block';
+                            })
+                            .catch(function(error) {
+                                console.error('Error checking ticket for seat:', error);
                             });
-                        }
 
                         seatGrid.appendChild(seatElement);
                     });

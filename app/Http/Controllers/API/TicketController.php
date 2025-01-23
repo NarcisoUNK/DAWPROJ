@@ -51,4 +51,9 @@ class TicketController extends BaseController
         $tickets = Ticket::with('seat.grandstand.race')->where('id_user', $id)->get();
         return response()->json(['data' => TicketResource::collection($tickets), 'message' => 'Tickets retrieved successfully.']);
     }
+    public function get_tickets_by_seat($id_seat)
+    {
+        $tickets = Ticket::where('id_seat', $id_seat)->get();
+        return response()->json(['data' => TicketResource::collection($tickets), 'message' => 'Tickets retrieved successfully.']);
+    }
 }
