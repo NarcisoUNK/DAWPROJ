@@ -10,7 +10,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #333;
+    background-color: #ec2828;
     color: #fff;
 }
 
@@ -27,6 +27,16 @@ body {
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+}
+a {
+    color: #000000;
+    text-decoration: none;
+}
+
+a:hover {
+    color:#ffffff; 
+    text-decoration:none; 
+    cursor:pointer;  
 }
 
 .menu-icon span {
@@ -49,7 +59,7 @@ body {
     top: 60px; /* Adjust the top position as needed */
     right: 20px; /* Adjust the right position as needed */
     width: 200px; /* Adjust the width as needed */
-    background: #444;
+    background: #42000080;
     color: white;
     border-radius: 8px;
     padding: 10px;
@@ -75,7 +85,7 @@ body {
 }
 
 .menu li:hover {
-    background: #555;
+    background: #ff0c0c;
 }
 /* Hidden Menu */
 .hidden {
