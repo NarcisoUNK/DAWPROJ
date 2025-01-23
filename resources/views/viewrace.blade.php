@@ -14,19 +14,22 @@
             </div>
         </section>
 
-        <!-- Grandstands Section -->
-        <section class="grandstands-section">
-            <h2>Grandstands</h2>
-            <div class="grandstands-container">
-                <!-- Grandstands will be dynamically loaded here -->
+        <!-- Grandstands and Circuit Section -->
+        <section class="grandstands-circuit-section">
+            <!-- Grandstands Section -->
+            <div class="grandstands-section">
+                <h2>Grandstands</h2>
+                <div class="grandstands-container">
+                    <!-- Grandstands will be dynamically loaded here -->
+                </div>
             </div>
-        </section>
 
-        <!-- Circuit Section -->
-        <section class="circuit-section">
-            <h2>Circuit</h2>
-            <div class="circuit-image">
-                <img id="circuit" alt="Circuit Image" />
+            <!-- Circuit Section -->
+            <div class="circuit-section">
+                <h2>Circuit</h2>
+                <div class="circuit-image">
+                    <img id="circuit" alt="Circuit Image" />
+                </div>
             </div>
         </section>
     </main>
@@ -72,7 +75,7 @@
                         grandstandsContainer.innerHTML = `<p>No grandstands available for this race.</p>`;
                         return;
                     }
-                    grandstands.forEach(function(grandstand) {console.log(grandstand);
+                    grandstands.forEach(function(grandstand) {
                         const grandstandCard = document.createElement('div');
                         grandstandCard.classList.add('grandstand-card');
                         let lowestPrice = Infinity;

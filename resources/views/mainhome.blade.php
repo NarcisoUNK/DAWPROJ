@@ -7,14 +7,14 @@
                 <a id="main-race-link" href="{{ url('race') }}" class="btn-primary">Buy Tickets</a> <!-- TODO:send race id -->
             </div>
             <div class="hero-image">
-                <img id="main-race-image" src="path/to/your/image.jpg" alt="Race Image" id="main-race-image" width=500>
+                <img id="main-race-image" src="path/to/your/image.jpg" alt="Race Image" width="500">
             </div>
         </section>
 
         <section class="events-section">
             <h2>Top Events</h2>
             <div class="events-container" id="events-container">
-                <!-- Corridas serão carregadas aqui -->
+                <!-- Races will be loaded here -->
             </div>
         </section>
     </main>
@@ -52,17 +52,6 @@
                 .catch(function(error) {
                     console.error('Error fetching races:', error);
                 });
-        });
-
-        // JavaScript for menu pop-up animation
-        const menuIcon = document.getElementById('menu-icon');
-        const menu = document.getElementById('menu');
-
-        menuIcon.addEventListener('click', () => {
-            console.log('Menu icon clicked'); // Debugging statement
-            console.log('Menu class before toggle:', menu.classList);
-            menu.classList.toggle('hidden');
-            console.log('Menu class after toggle:', menu.classList);
         });
     </script>
 </x-layout>

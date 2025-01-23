@@ -1,0 +1,77 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.main {
+    padding: 20px;
+    align-items: center;
+}
+
+h2, h3 {
+    color: #444;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 10px;
+    
+}
+
+table th, table td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-transform: uppercase;
+    align-items: center;
+}
+
+table tbody tr {
+    background-color: #fff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    animation: fadeInFromSky 0.8s ease-in-out;
+}
+
+table tbody tr:hover {
+    background-color: #f9f9f9;
+    transform: scale(1.02);
+}
+
+@keyframes fadeInFromSky {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+table tbody tr td.highlight {
+    background-color: #ffffff;
+    animation: highlight 1s ease-in-out;
+}
+
+@keyframes highlight {
+    from {
+        background-color: #ffffff;
+    }
+    to {
+        background-color: #fff;
+    }
+}

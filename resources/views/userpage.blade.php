@@ -1,4 +1,5 @@
 <x-layout>
+    <link rel="stylesheet" href="{{ asset('userpage.css') }}">
     <main class="main">
         <div>
             <h2 id="username">Hello </h2>
@@ -55,8 +56,9 @@
                         console.log('Tickets data:', tickets); // Debugging statement
                         const ticketsContainer = document.getElementById('tickets').getElementsByTagName('tbody')[0];
 
-                        for (const ticket of tickets) {
+                        tickets.forEach(function(ticket, index) {
                             const ticketItem = document.createElement('tr');
+                            ticketItem.classList.add('new-ticket');
                             const ticketEvent = document.createElement('td');
                             const ticketGrandstand = document.createElement('td');
                             const ticketSeat = document.createElement('td');
@@ -72,7 +74,13 @@
                             ticketItem.appendChild(ticketSeat);
                             ticketItem.appendChild(ticketPrice);
                             ticketsContainer.appendChild(ticketItem);
-                        };
+
+                            // Highlight the new ticket row
+                            setTimeout(() => {
+                                ticketItem.classList.remove('new-ticket');
+                                ticketItem.querySelectorAll('td').forEach(td => td.classList.add('highlight'));
+                            }, 500);
+                        });
 
                     })
                     .catch(function(error) {
