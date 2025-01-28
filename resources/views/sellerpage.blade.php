@@ -6,7 +6,6 @@
 
         <section class="stats-section">
             <div id ="salesChart" class="stats-card">
-                
             </div>
         </section>
 
