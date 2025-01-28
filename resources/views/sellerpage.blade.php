@@ -1,6 +1,23 @@
+
 <x-layout>
     <link rel="stylesheet" href="{{ asset('sellerpage.css') }}">
     <main class="dashboard">
+        <section class="filter-section">
+            <form id="filterForm">
+                <label for="yearFilter">Year:</label>
+                <select id="yearFilter" name="year">
+                    <option value="">All</option>
+                    <!-- Add options dynamically -->
+                </select>
+                <label for="locationFilter">Location:</label>
+                <select id="locationFilter" name="location">
+                    <option value="">All</option>
+                    <!-- Add options dynamically -->
+                </select>
+                <button type="button" onclick="applyFilters()">Apply Filters</button>
+            </form>
+        </section>
+
         <section class="graph-section">
             <canvas id="salesChart"></canvas>
         </section>
@@ -66,11 +83,75 @@
             }
         });
 
+        let allRaces = [];
+
         axios.get('/api/user/'+getCookie('id_user')+'/races').then(function(response) {
-            const races = response.data.data;
+            allRaces = response.data.data;
+
+            // Populate filter options
+            populateFilterOptions(allRaces);
 
             // Update the events section
+            updateEventsSection(allRaces);
+
+            // Update the races table
+            updateRacesTable(allRaces);
+
+            // Update the sales chart
+            updateSalesChart(allRaces);
+
+        }).catch(function(error) {
+            console.error('Error fetching races:', error);
+        });
+
+        function populateFilterOptions(races) {
+            const yearFilter = document.getElementById('yearFilter');
+            const locationFilter = document.getElementById('locationFilter');
+            const years = new Set();
+            const locations = new Set();
+
+            races.forEach(function(race) {
+                years.add(race.year);
+                locations.add(race.city + ', ' + race.country);
+            });
+
+            years.forEach(function(year) {
+                const option = document.createElement('option');
+                option.value = year;
+                option.text = year;
+                yearFilter.appendChild(option);
+            });
+
+            locations.forEach(function(location) {
+                const option = document.createElement('option');
+                option.value = location;
+                option.text = location;
+                locationFilter.appendChild(option);
+            });
+        }
+
+        function applyFilters() {
+            const year = document.getElementById('yearFilter').value;
+            const location = document.getElementById('locationFilter').value;
+
+            const filteredRaces = allRaces.filter(function(race) {
+                return (year === '' || race.year == year) &&
+                       (location === '' || (race.city + ', ' + race.country) == location);
+            });
+
+            // Update the events section
+            updateEventsSection(filteredRaces);
+
+            // Update the races table
+            updateRacesTable(filteredRaces);
+
+            // Update the sales chart
+            updateSalesChart(filteredRaces);
+        }
+
+        function updateEventsSection(races) {
             const eventsContainer = document.getElementById('events-container');
+            eventsContainer.innerHTML = '';
             races.forEach(function(race) {
                 const eventCard = document.createElement('div');
                 eventCard.classList.add('event-card');
@@ -80,7 +161,32 @@
                     <a href="/viewrace/${race.id_race}" class="btn-primary">Info</a>
                 `;
                 eventsContainer.appendChild(eventCard);
+            });
+        }
 
+        function updateRacesTable(races) {
+            const racesTableBody = document.getElementById('races-table-body');
+            racesTableBody.innerHTML = '';
+            races.forEach(function(race) {
+                const raceRow = document.createElement('tr');
+                raceRow.innerHTML = `
+                    <td>${race.race_name}</td>
+                    <td>${race.year}</td>
+                    <td>${race.city}, ${race.country}</td>
+                    <td>
+                        <a href="/viewrace/${race.id_race}" class="btn-edit">Edit</a>
+                        <button class="btn-delete" onclick="deleteRace(${race.id_race})">Delete</button>
+                    </td>
+                `;
+                racesTableBody.appendChild(raceRow);
+            });
+        }
+
+        function updateSalesChart(races) {
+            salesChart.data.labels = [];
+            salesChart.data.datasets[0].data = [];
+
+            races.forEach(function(race) {
                 axios.get('/api/race/'+race.id_race+'/tickets').then(function(response) {      
                     const tickets = response.data.data;
                     let totalSales = 0;
@@ -97,26 +203,7 @@
                     console.error('Error fetching tickets:', error);      
                 });
             });
-
-            // Update the races table
-            const racesTableBody = document.getElementById('races-table-body');
-            races.forEach(function(race) {
-                const raceRow = document.createElement('tr');
-                raceRow.innerHTML = `
-                    <td>${race.race_name}</td>
-                    <td>${race.year}</td>
-                    <td>${race.city}, ${race.country}</td>
-                    <td>
-                        <a href="/viewrace/${race.id_race}" class="btn-edit">Edit</a>
-                        <button class="btn-delete" onclick="deleteRace(${race.id_race})">Delete</button>
-                    </td>
-                `;
-                racesTableBody.appendChild(raceRow);
-            });
-
-        }).catch(function(error) {
-            console.error('Error fetching races:', error);
-        });
+        }
 
         function deleteRace(raceId) {
             if (confirm('Are you sure you want to delete this race?')) {

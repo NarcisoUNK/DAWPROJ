@@ -44,7 +44,4 @@ Route::get('/tickets/seats', [TicketController::class, 'get_seats_with_tickets']
 Route::post('/ticket', [TicketController::class, 'add'])->middleware(['auth:sanctum']);
 Route::get('/ticket/delete/{id}', [TicketController::class, 'delete'])->middleware(['auth:sanctum']);
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/user/{id}/sales', [SalesController::class, 'getSalesData']);
-});
 Route::get('/ticket/seat/{id_seat}', [TicketController::class, 'get_tickets_by_seat']);
