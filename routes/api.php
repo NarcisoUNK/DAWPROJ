@@ -21,7 +21,9 @@ Route::get('/race/{id}', [RaceController::class, 'show']);
 Route::get('/user/{id_user}/races', [RaceController::class, 'user_races']);
 Route::post('/race', [RaceController::class, 'add'])->middleware(['auth:sanctum']);
 Route::get('/race/delete/{id}', [RaceController::class, 'delete'])->middleware(['auth:sanctum']);
-
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/race/delete/{id}', [RaceController::class, 'delete']);
+});
 # GRANDSTAND ROUTES
 Route::get('/race/{race}/grandstands', [GrandstandController::class, 'get_all_by_race']);
 Route::get('/grandstand/{id}', [GrandstandController::class, 'get']);
@@ -42,7 +44,4 @@ Route::get('/tickets/seats', [TicketController::class, 'get_seats_with_tickets']
 Route::post('/ticket', [TicketController::class, 'add'])->middleware(['auth:sanctum']);
 Route::get('/ticket/delete/{id}', [TicketController::class, 'delete'])->middleware(['auth:sanctum']);
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/user/{id}/sales', [SalesController::class, 'getSalesData']);
-});
 Route::get('/ticket/seat/{id_seat}', [TicketController::class, 'get_tickets_by_seat']);

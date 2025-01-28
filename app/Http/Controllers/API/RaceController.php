@@ -51,4 +51,19 @@ class RaceController extends BaseController
         $races = Race::where('id_user', $id_user)->get();
         return $this->sendResponse(RaceResource::collection($races),'Races retrieved successfully');
     }
+    public function delete($id)
+    {
+        $race = Race::find($id);
+        if (!$race) {
+            return $this->sendError('Race not found.');
+        }
+
+        // Check if the authenticated user has permission to delete the race
+        if (auth()->user()->id_user !== $race->id_user) {
+            return $this->sendError('Unauthorized.', [], 401);
+        }
+
+        $race->delete();
+        return $this->sendResponse([], 'Race deleted successfully.');
+    }
 }

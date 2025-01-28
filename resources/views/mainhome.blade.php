@@ -44,14 +44,42 @@
                         eventCard.innerHTML = `
                             <img src="data:image/gif;base64,${race.image}" alt="${race.race_name}">
                             <p>${race.race_name}</p>
-                            <a href="/viewrace/${race.id_race}" class="btn-primary">Buy Tickets</a>
+                            <a href="/viewrace/${race.id_race}" class="btn-primary buy-tickets">Buy Tickets</a>
                         `;
                         eventsContainer.appendChild(eventCard);
+                    });
+
+                    // Add event listeners to the Buy Tickets buttons
+                    document.querySelectorAll('.buy-tickets').forEach(function(button) {
+                        button.addEventListener('click', function(event) {
+                            if (!getCookie('id_user')) {
+                                event.preventDefault();
+                                alert('You need to log in to buy tickets.');
+                                window.location.href = '{{ url("login") }}';
+                            }
+                        });
                     });
                 })
                 .catch(function(error) {
                     console.error('Error fetching races:', error);
                 });
         });
+
+        function getCookie(name) {
+            const nameEquals = name + '=';
+            const cookieArray = document.cookie.split(';');
+
+            for (let cookie of cookieArray) {
+                while (cookie.charAt(0) == ' ') {
+                    cookie = cookie.slice(1, cookie.length);
+                }
+
+                if (cookie.indexOf(nameEquals) == 0) {
+                    return decodeURIComponent(cookie.slice(nameEquals.length, cookie.length));
+                }
+            }
+
+            return null;
+        }
     </script>
 </x-layout>
